@@ -1,0 +1,48 @@
+const fs = require('fs');
+const User = require('../../models/user');
+const Profile = require('../../models/profile');
+
+const controllers = {};
+
+controllers.uploadProfilePics = async (req, res, next) => {
+    if (req.file) {
+        try {
+            const profile = await Profile.findOne({ user: req.user._id });
+            const profilePics = `/uploads/profilePics/${req.file.filename}`;
+            if (profile) {
+                await profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics } }, { new: true });
+            }
+            await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics } }, { new: true });
+
+            res.redirect('/api/dashbord/create-profile');
+            // res.status(200).json({ profilePics });
+        } catch (e) {
+            res.status(500).json({ profilePics: req.user.profilePics });
+        }
+    } else {
+        res.redirect('/api/dashbord/create-profile');
+        // res.status(500).json({ profilePics: req.user.profilePics });
+    }
+};
+
+controllers.removeProfilePics = (req, res, next) => {
+    try {
+        const defaultProfilePic = '/uploads/profilePics/default.png';
+        const currentProfilePic = req.user.profilePics;
+
+        fs.unlink(`public${currentProfilePic}`, async (err) => {
+            const profile = await Profile.findOne({ user: req.user._id });
+            if (profile) {
+                await profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+            }
+            await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+
+            res.redirect('/api/dashbord/create-profile');
+            // res.status(200).json({ profilePics: defaultProfilePic });
+        });
+    } catch (e) {
+        res.status(500).json({ profilePics: req.user.profilePics });
+    }
+};
+
+module.exports = controllers;
