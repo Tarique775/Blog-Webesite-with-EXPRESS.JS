@@ -69,8 +69,64 @@ controllers.postCreateProfile = async (req, res, next) => {
         });
 
         const createProfile = await profile.save();
-        await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profile: createProfile._id } });
+        await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profile: createProfile._id } }, { new: true });
         res.redirect('/api/dashbord/');
+    } catch (e) {
+        next(e);
+    }
+};
+
+controllers.getEditProfile = async (req, res, next) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user._id });
+        // console.log(profile);
+        if (!profile) {
+            return res.redirect('/api/dashbord/create-profile');
+        }
+        res.render('pages/dashbord/edit-profile', { error: {}, profile });
+    } catch (e) {
+        next(e);
+    }
+};
+
+controllers.postEditProfile = async (req, res, next) => {
+    const { name, title, bio, website, facebook, twitter, github 
+} = req.body;
+
+    const errors = validationResult(req).formatWith(errorFormetter);
+    if (!errors.isEmpty()) {
+        return res.render('pages/dashbord/edit-profile', {
+            error: errors.mapped(),
+            profiles: {
+                name,
+                title,
+                bio,
+                links: {
+                    website,
+                    facebook,
+                    twitter,
+                    github,
+                },
+            },
+        });
+  }
+
+    try {
+        const profile = {
+            name,
+            title,
+            bio,
+            links: {
+                website: website || '',
+                facebook: facebook || '',
+                twitter: twitter || '',
+                github: github || '',
+            },
+        };
+
+        const updateProfile = await Profile.findOneAndUpdate({ user: req.user._id }, { $set: profile }, { new: true });
+
+        res.render('pages/dashbord/edit-profile', { error: {}, profile: updateProfile });
     } catch (e) {
         next(e);
     }

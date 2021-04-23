@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EditProfile</title>
+    <title>editProfile</title>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,17 +21,213 @@
   </head>
   <body>
     <%- include('../nabbar.ejs') -%>
-    <div class="container my-container my-5">
+
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <h1>Wellcome TO edit Profile</h1>
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <div class="card card-body my-5">
+                <h4>Edit Your Profile</h4>
+                <div class="profile-pics">
+                  <img
+                    src="<%=user.profilePics%>"
+                    alt="Profile Pics"
+                    class="img-thumbnail img-fluid"
+                    id="profilePics"
+                    width="200px"
+                    height="200px"
+                  />
+
+                  <form
+                    action="/api/dashbord/uploads/profilePics"
+                    method="POST"
+                    class="my-2"
+                    id="profilePicsForm"
+                    enctype="multipart/form-data"
+                  >
+                    <input
+                      type="button"
+                      value="Upload Profile Picture"
+                      id="uploadProfilePics"
+                      class="btn btn-info btn-sm my-2"
+                      onclick="document.getElementById('profilePicsFile').click()"
+                    />
+                    <input
+                      type="file"
+                      name="profilePics"
+                      id="profilePicsFile"
+                      accept="image/*"
+                      style="display: none"
+                    />
+                    <input
+                      type="submit"
+                      value="Confirm"
+                      id="confirmProfilePics"
+                      class="btn btn-warning btn-sm my-2"
+                    />
+                  </form>
+                  <form
+                    action="/api/dashbord/uploads/removeProfilePics"
+                    method="POST"
+                  >
+                    <input
+                      type="submit"
+                      value="Remove Profile Picture"
+                      id="removeProfilePics"
+                      style="display: <%= user.profilePics.includes('default.png') ? 'none' : 'block' %>"
+                      class="btn btn-danger btn-sm my-2"
+                    />
+                  </form>
+                </div>
+
+                <br />
+                <div>
+                  <form action="/api/dashbord/edit-profile" method="POST">
+                    <div class="form-group">
+                      <label for="name">Enter Your Name</label>
+                      <input
+                        type="text"
+                        class="form-control <%= error.name ?'is-invalid' : ''%>"
+                        value="<%= profile.name ? profile.name : ''%>"
+                        name="name"
+                        placeholder="Enter Your Name"
+                        id="name"
+                      />
+                      <div class="invalid-feedback">
+                        <strong><%=error.name && error.name%></strong>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                      <label for="email">Enter Your Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="name"
+                        placeholder="Enter Your Email"
+                        id="email"
+                        value="<%=user.email %>"
+                        disabled
+                      />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                      <label for="title">Enter Your Title</label>
+                      <input
+                        type="text"
+                        class="form-control <%= error.title ?'is-invalid' : ''%>"
+                        value="<%= profile.title ? profile.title : ''%>"
+                        name="title"
+                        placeholder="Enter Your Title"
+                        id="title"
+                      />
+                      <div class="invalid-feedback">
+                        <strong><%=error.title && error.title%></strong>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                      <label for="bio">Enter Your Bio</label>
+                      <textarea
+                        name="bio"
+                        id="bio"
+                        class="form-control <%= error.bio ?'is-invalid' : ''%>"
+                      >
+<%= profile.bio ? profile.bio : ''%></textarea
+                      >
+                      <div class="invalid-feedback">
+                        <strong><%=error.bio && error.bio%></strong>
+                      </div>
+                    </div>
+                    <br />
+                    <div>
+                      <p class="lead">Your Social Links</p>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fab fa-internet-explorer"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control <%= error.website ?'is-invalid' : ''%>"
+                          value="<%= profile.links.website ? profile.links.website : ''%>"
+                          placeholder="Website Link"
+                          name="website"
+                        />
+                        <div class="invalid-feedback">
+                          <strong><%=error.website && error.website%></strong>
+                        </div>
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fab fa-facebook-square"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control <%= error.facebook ?'is-invalid' : ''%>"
+                          value="<%= profile.links.facebook ? profile.links.facebook : ''%>"
+                          placeholder="Facebook Link"
+                          name="facebook"
+                        />
+                        <div class="invalid-feedback">
+                          <strong><%=error.facebook && error.facebook%></strong>
+                        </div>
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fab fa-twitter-square"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control <%= error.twitter ?'is-invalid' : ''%>"
+                          value="<%= profile.links.twitter ? profile.links.twitter : ''%>"
+                          placeholder="Twitter Link"
+                          name="twitter"
+                        />
+                        <div class="invalid-feedback">
+                          <strong><%=error.twitter && error.twitter%></strong>
+                        </div>
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fab fa-github-square"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control <%= error.github ?'is-invalid' : ''%>"
+                          value="<%= profile.links.github ? profile.links.github : ''%>"
+                          placeholder="Github Link"
+                          name="github"
+                        />
+                        <div class="invalid-feedback">
+                          <strong><%=error.github && error.github%></strong>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">
+                      Update Profile
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <%- include('../footer.ejs') -%>
+
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      src="https://kit.fontawesome.com/e23e3d5407.js"
       crossorigin="anonymous"
     ></script>
   </body>

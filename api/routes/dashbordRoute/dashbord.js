@@ -9,6 +9,10 @@ router.get('/', isAuth, dashbordController.getDashbord);
 
 router.get('/create-profile', isAuth, dashbordController.getCreateProfile);
 
+router.get('/edit-profile', isAuth, dashbordController.getEditProfile);
+
 router.post('/create-profile', isAuth, profileValidator, dashbordController.postCreateProfile);
+
+router.post('/edit-profile', isAuth, profileValidator, dashbordController.postEditProfile);
 
 module.exports = router;

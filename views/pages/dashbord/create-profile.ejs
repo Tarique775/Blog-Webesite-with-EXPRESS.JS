@@ -134,8 +134,9 @@
                         name="bio"
                         id="bio"
                         class="form-control <%= error.bio ?'is-invalid' : ''%>"
-                        value="<%= value.bio ? value.bio : ''%>"
-                      ></textarea>
+                      >
+<%= value.bio ? value.bio : ''%></textarea
+                      >
                       <div class="invalid-feedback">
                         <strong><%=error.bio && error.bio%></strong>
                       </div>

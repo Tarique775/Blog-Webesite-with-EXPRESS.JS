@@ -9,19 +9,23 @@ controllers.uploadProfilePics = async (req, res, next) => {
         try {
             const profile = await Profile.findOne({ user: req.user._id });
             const profilePics = `/uploads/profilePics/${req.file.filename}`;
-            if (profile) {
-                await profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics } }, { new: true });
-            }
-            await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics } }, { new: true });
 
-            res.redirect('/api/dashbord/create-profile');
-            // res.status(200).json({ profilePics });
+            if (profile) {
+                await Profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics } }, { new: true });
+
+                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics } }, { new: true });
+
+                res.redirect('/api/dashbord/edit-profile');
+            } else {
+                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics } }, { new: true });
+
+                res.redirect('/api/dashbord/create-profile');
+            }
         } catch (e) {
-            res.status(500).json({ profilePics: req.user.profilePics });
+            res.status(501).json({ profilePics: req.user.profilePics });
         }
     } else {
-        res.redirect('/api/dashbord/create-profile');
-        // res.status(500).json({ profilePics: req.user.profilePics });
+        res.status(500).json({ profilePics: req.user.profilePics });
     }
 };
 
@@ -32,13 +36,18 @@ controllers.removeProfilePics = (req, res, next) => {
 
         fs.unlink(`public${currentProfilePic}`, async (err) => {
             const profile = await Profile.findOne({ user: req.user._id });
-            if (profile) {
-                await profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
-            }
-            await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
 
-            res.redirect('/api/dashbord/create-profile');
-            // res.status(200).json({ profilePics: defaultProfilePic });
+            if (profile) {
+                await Profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+
+                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+
+                res.redirect('/api/dashbord/edit-profile');
+            } else {
+                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+
+                res.redirect('/api/dashbord/create-profile');
+            }
         });
     } catch (e) {
         res.status(500).json({ profilePics: req.user.profilePics });

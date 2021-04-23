@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // const validators = require('validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Profile = require('./profile');
+// const Profile = require('./profile');
 
 const { Schema } = mongoose;
 
@@ -28,7 +28,7 @@ const userSchema = new Schema(
         },
         profile: {
             type: Schema.Types.ObjectId,
-            ref: Profile,
+            ref: 'Profile',
         },
         profilePics: {
             type: String,
