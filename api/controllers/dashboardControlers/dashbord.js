@@ -97,7 +97,7 @@ controllers.postEditProfile = async (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.render('pages/dashbord/edit-profile', {
             error: errors.mapped(),
-            profiles: {
+            profile: {
                 name,
                 title,
                 bio,
