@@ -88,7 +88,7 @@ controllers.postLogin = async (req, res, next) => {
         const cookie = res.cookie('jwt', token, {
             expires: new Date(Date.now() + 10 * 60 * 1000),
             httpOnly: true,
-    });
+        });
         console.log(cookie);
         res.redirect('/api/dashbord');
         // res.redirect('/');

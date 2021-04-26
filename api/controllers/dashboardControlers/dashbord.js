@@ -69,7 +69,11 @@ controllers.postCreateProfile = async (req, res, next) => {
         });
 
         const createProfile = await profile.save();
-        await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profile: createProfile._id } }, { new: true });
+        await User.findOneAndUpdate(
+            { _id: req.user._id },
+            { $set: { profile: createProfile._id } },
+            { new: true },
+        );
         res.redirect('/api/dashbord/');
     } catch (e) {
         next(e);
@@ -109,7 +113,7 @@ controllers.postEditProfile = async (req, res, next) => {
                 },
             },
         });
-  }
+    }
 
     try {
         const profile = {
@@ -124,7 +128,11 @@ controllers.postEditProfile = async (req, res, next) => {
             },
         };
 
-        const updateProfile = await Profile.findOneAndUpdate({ user: req.user._id }, { $set: profile }, { new: true });
+        const updateProfile = await Profile.findOneAndUpdate(
+            { user: req.user._id },
+            { $set: profile },
+            { new: true },
+        );
 
         res.render('pages/dashbord/edit-profile', { error: {}, profile: updateProfile });
     } catch (e) {

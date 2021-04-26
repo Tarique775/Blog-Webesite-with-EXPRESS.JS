@@ -12,19 +12,19 @@ const mongoose = require('mongoose');
 // const config = require('config');
 
 const mongoDBConnect = async () => {
-    try {
-        const mongooseConnect = await mongoose.connect(process.env.MONGODB, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true,
-        });
-        if (mongooseConnect) {
-            return console.log('database conected successfully!');
-        }
-    } catch (err) {
-        throw new Error(err);
+  try {
+    const mongooseConnect = await mongoose.connect(process.env.MONGODB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    });
+    if (mongooseConnect) {
+      return console.log('database conected successfully!');
     }
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 mongoDBConnect();
 
@@ -49,31 +49,31 @@ app.use(locals());
 app.use('/api/user', userRoute);
 app.use('/api/dashbord', dashbordRoute, uploadProfilePicsRoute);
 app.get('/', (req, res, next) => {
-    res.render('pages/home');
+  res.render('pages/home');
 });
 
 app.use((req, res, next) => {
-    res.render('pages/404NotFound');
-    // res.status(404).json({ message: 'not found!' });
-    next();
+  res.render('pages/404NotFound');
+  // res.status(404).json({ message: 'not found!' });
+  next();
 });
 
 app.use((err, req, res, next) => {
-    if (res.headersSent) {
-        res.render('pages/500Server');
-        return next(err);
-    }
-    if (err) {
-        res.render('pages/500Server');
-        // return res.status(500).json({ message: err.message });
-        console.log(err.message);
-    } else {
-        res.render('pages/500Server');
-        // return res.status(500).json({ message: 'there was a requesting error!' });
-        console.log('there was a requesting error!');
-    }
+  if (res.headersSent) {
+    res.render('pages/500Server');
+    return next(err);
+  }
+  if (err) {
+    res.render('pages/500Server');
+    // return res.status(500).json({ message: err.message });
+    console.log(err.message);
+  } else {
+    res.render('pages/500Server');
+    // return res.status(500).json({ message: 'there was a requesting error!' });
+    console.log('there was a requesting error!');
+  }
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`listen on port ${process.env.PORT}`);
+  console.log(`listen on port ${process.env.PORT}`);
 });

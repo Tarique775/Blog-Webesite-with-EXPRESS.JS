@@ -9,7 +9,11 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const fileExt = path.extname(file.originalname);
-        const fileName = `${file.originalname.replace(fileExt, '').toLowerCase().split(' ').join('-')}`;
+        const fileName = `${file.originalname
+            .replace(fileExt, '')
+            .toLowerCase()
+            .split(' ')
+            .join('-')}`;
         cb(null, fileName + fileExt);
     },
 });
@@ -19,7 +23,11 @@ const upload = multer({
     limits: 1224 * 1224 * 10,
     fileFilter: (req, file, cb) => {
         if (file.fieldname === 'profilePics') {
-            if (file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+            if (
+                file.mimetype === 'image/jpg' ||
+                file.mimetype === 'image/jpeg' ||
+                file.mimetype === 'image/png'
+            ) {
                 cb(null, true);
             } else {
                 cb(new Error('only .jpg,.png,.jpeg formet allowed'));

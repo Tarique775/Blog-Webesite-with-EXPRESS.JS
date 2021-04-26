@@ -14,8 +14,12 @@ const profileValidator = [
     body('name').isLength({ max: 50 }).not().isEmpty().withMessage('Please provide a Name')
 .trim(),
 
-    body('title').isLength({ max: 50 }).not().isEmpty().withMessage('Please provide a Title')
-.trim(),
+    body('title')
+        .isLength({ max: 50 })
+        .not()
+        .isEmpty()
+        .withMessage('Please provide a Title')
+        .trim(),
 
     body('bio').isLength({ max: 50 }).not().isEmpty().withMessage('Please provide a Bio')
 .trim(),

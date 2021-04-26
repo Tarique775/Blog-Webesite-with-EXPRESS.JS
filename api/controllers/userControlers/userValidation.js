@@ -25,7 +25,10 @@ const userValidator = [
         })
         .trim(),
 
-    body('password').isLength({ min: 5 }).withMessage('Password must be grater than 5 chars').trim(),
+    body('password')
+        .isLength({ min: 5 })
+        .withMessage('Password must be grater than 5 chars')
+        .trim(),
 
     body('confirmPassword')
         .custom((confirmPassword, { req }) => {

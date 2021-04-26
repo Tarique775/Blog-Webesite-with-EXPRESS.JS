@@ -11,13 +11,25 @@ controllers.uploadProfilePics = async (req, res, next) => {
             const profilePics = `/uploads/profilePics/${req.file.filename}`;
 
             if (profile) {
-                await Profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics } }, { new: true });
+                await Profile.findOneAndUpdate(
+                    { user: req.user._id },
+                    { $set: { profilePics } },
+                    { new: true },
+                );
 
-                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics } }, { new: true });
+                await User.findOneAndUpdate(
+                    { _id: req.user._id },
+                    { $set: { profilePics } },
+                    { new: true },
+                );
 
                 res.redirect('/api/dashbord/edit-profile');
             } else {
-                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics } }, { new: true });
+                await User.findOneAndUpdate(
+                    { _id: req.user._id },
+                    { $set: { profilePics } },
+                    { new: true },
+                );
 
                 res.redirect('/api/dashbord/create-profile');
             }
@@ -38,13 +50,25 @@ controllers.removeProfilePics = (req, res, next) => {
             const profile = await Profile.findOne({ user: req.user._id });
 
             if (profile) {
-                await Profile.findOneAndUpdate({ user: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+                await Profile.findOneAndUpdate(
+                    { user: req.user._id },
+                    { $set: { profilePics: defaultProfilePic } },
+                    { new: true },
+                );
 
-                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+                await User.findOneAndUpdate(
+                    { _id: req.user._id },
+                    { $set: { profilePics: defaultProfilePic } },
+                    { new: true },
+                );
 
                 res.redirect('/api/dashbord/edit-profile');
             } else {
-                await User.findOneAndUpdate({ _id: req.user._id }, { $set: { profilePics: defaultProfilePic } }, { new: true });
+                await User.findOneAndUpdate(
+                    { _id: req.user._id },
+                    { $set: { profilePics: defaultProfilePic } },
+                    { new: true },
+                );
 
                 res.redirect('/api/dashbord/create-profile');
             }
