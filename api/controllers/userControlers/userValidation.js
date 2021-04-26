@@ -22,7 +22,8 @@ const userValidator = [
             if (user) {
                 return Promise.reject('Email allready used');
             }
-        }),
+        })
+        .trim(),
 
     body('password').isLength({ min: 5 }).withMessage('Password must be grater than 5 chars').trim(),
 

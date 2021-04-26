@@ -4,7 +4,7 @@ const validator = require('validator');
 const linkValidator = (value) => {
     if (value) {
         if (!validator.isURL(value)) {
-            throw new Error('Must be a URL Link');
+            throw new Error('Must be a URL Type');
         }
         return true;
     }

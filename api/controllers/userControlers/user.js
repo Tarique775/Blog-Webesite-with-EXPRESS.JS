@@ -36,11 +36,7 @@ controllers.postRegister = async (req, res, next) => {
         });
         const newUser = await user.save();
         if (newUser) {
-            res.render('pages/user/register', {
-                error: {},
-                value: {},
-                success: 'Registration has been done successfully',
-            });
+            res.redirect('/api/user/login');
         }
         console.log('successfull', newUser);
     } catch (err) {
@@ -90,7 +86,7 @@ controllers.postLogin = async (req, res, next) => {
         const token = await user.getAuthToken();
         console.log(token);
         const cookie = res.cookie('jwt', token, {
-            expires: new Date(Date.now() + 3 * 60 * 1000),
+            expires: new Date(Date.now() + 10 * 60 * 1000),
             httpOnly: true,
     });
         console.log(cookie);
