@@ -14,9 +14,10 @@ const userValidator = [
         .trim(),
 
     body('email')
-        .isEmail()
+        .matches(
+            /^([a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,7})$/g,
+        )
         .withMessage('Please provide a valid email')
-        .normalizeEmail()
         .custom(async (email) => {
             const user = await User.findOne({ email });
             if (user) {
