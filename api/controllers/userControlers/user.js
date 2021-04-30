@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
 const User = require('../../models/user');
 const { errorFormetter } = require('./userValidation');
 const { errorFormet } = require('./loginValidator');
@@ -104,6 +105,42 @@ controllers.postLogout = async (req, res, next) => {
         res.clearCookie('jwt');
         await req.user.save();
         res.redirect('/api/user/login');
+    } catch (e) {
+        next(e);
+    }
+};
+
+controllers.getChangePassword = (req, res, next) => {
+    res.render('pages/user/changePassword', { error: {}, value: {}, success: '' });
+};
+
+controllers.postChangePassword = async (req, res, next) => {
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    const errors = validationResult(req).formatWith(errorFormet);
+    if (!errors.isEmpty()) {
+        return res.render('pages/user/changePassword', {
+            error: errors.mapped(),
+            oldPassword,
+            newPassword,
+            confirmPassword,
+            success: '',
+            value: {},
+        });
+    }
+
+    try {
+        await bcrypt.compare(oldPassword, req.user.password);
+
+        const hash = await bcrypt.hash(newPassword, 12);
+
+        const chngPass = await User.findOneAndUpdate(
+            { _id: req.user._id },
+            { $set: { password: hash } }
+        );
+        if (chngPass) {
+            return res.redirect('/api/user/logout');
+        }
     } catch (e) {
         next(e);
     }
