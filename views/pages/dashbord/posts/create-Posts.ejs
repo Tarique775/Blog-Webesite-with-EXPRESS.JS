@@ -25,7 +25,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2"><%-include('../../dashbord-nav.ejs') -%></div>
-        <div class="col-md-10">
+        <div class="col-md-8 offset-md-1">
           <div class="card card-body my-5">
             <form
               action="/api/dashbord/create-posts"
@@ -72,13 +72,10 @@
                   <input
                       type="submit"
                       value="Upload"
-                      id="confirmProfilePics"
+                      id="uploadFiles"
                       class="btn btn-success btn-bg my-2"
                     />
-                 
-                  
                 </div>
-              
               <input
                 type="submit"
                 class="btn btn-primary "
@@ -91,5 +88,8 @@
       </div>
     </div>
     <%- include('../../footer.ejs') -%>
+     <script src="https://cdn.tiny.cloud/1/lrpil8nsgi9viih3y7q30s0nqxeaqfwgn6s104vgbxzi2va5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+     <script src="/scripts/tinymce.js"></script>
   </body>
 </html>

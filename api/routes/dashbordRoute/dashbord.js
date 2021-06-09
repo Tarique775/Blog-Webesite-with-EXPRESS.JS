@@ -17,7 +17,7 @@ router.get('/edit-profile', isAuth, dashbordController.getEditProfile);
 
 router.post('/edit-profile', isAuth, profileValidator, dashbordController.postEditProfile);
 
-router.get('/create-posts', getCreatePosts);
+router.get('/create-posts', isAuth, getCreatePosts);
 
 router.post('/create-posts');
 

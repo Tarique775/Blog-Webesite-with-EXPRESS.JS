@@ -78,4 +78,15 @@ controllers.removeProfilePics = (req, res, next) => {
     }
 };
 
+controllers.postImageController = (req, res, next) => {
+    if (req.file) {
+        return res.status(200).json({
+            imgUrl: `/uploads/postImage/${req.file.filename}`,
+        });
+    }
+    return res.status(404).json({
+        message: 'Server Error',
+    });
+};
+
 module.exports = controllers;
