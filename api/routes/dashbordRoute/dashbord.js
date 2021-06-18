@@ -3,7 +3,11 @@ const dashbordController = require('../../controllers/dashboardControlers/dashbo
 const { isAuth } = require('../../middleware/authentication');
 const { profileValidator } = require('../../controllers/dashboardControlers/profileValidation');
 
-const { getCreatePosts } = require('../../controllers/dashboardControlers/posts');
+const { postValidatior } = require('../../controllers/dashboardControlers/postsValidation');
+
+const { getCreatePosts, postCreatePosts } = require('../../controllers/dashboardControlers/posts');
+
+const postUpload = require('../../middleware/postMulterUpload');
 
 const router = express.Router();
 
@@ -19,6 +23,6 @@ router.post('/edit-profile', isAuth, profileValidator, dashbordController.postEd
 
 router.get('/create-posts', isAuth, getCreatePosts);
 
-router.post('/create-posts');
+router.post('/create-posts', isAuth, postUpload.single('photo'), postValidatior, postCreatePosts);
 
 module.exports = router;

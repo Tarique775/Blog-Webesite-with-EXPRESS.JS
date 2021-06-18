@@ -22,7 +22,7 @@ const upload = multer({
     storage,
     limits: 1224 * 1224 * 10,
     fileFilter: (req, file, cb) => {
-        if (file.fieldname === 'post-image') {
+        if (file.fieldname === 'post-image' || 'photo') {
             if (
                 file.mimetype === 'image/jpg' ||
                 file.mimetype === 'image/jpeg' ||
