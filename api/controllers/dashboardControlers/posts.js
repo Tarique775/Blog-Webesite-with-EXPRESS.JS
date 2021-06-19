@@ -8,7 +8,7 @@ const controllers = {};
 
 controllers.getCreatePosts = (req, res, next) => {
     res.render('pages/dashbord/posts/create-posts', {
-        errors: {},
+        error: {},
         value: {},
     });
 };
@@ -21,7 +21,7 @@ controllers.postCreatePosts = async (req, res, next) => {
 
     if (!errors.isEmpty()) {
         return res.render('pages/dashbord/posts/create-posts', {
-            errors: errors.mapped(),
+            error: errors.mapped(),
             value: {
                 title,
                 body,
@@ -39,7 +39,7 @@ controllers.postCreatePosts = async (req, res, next) => {
             title,
             body,
             author: req.user._id,
-            tags,
+            tags: tags || '',
             thumbnail: '',
             readTime,
             likes: [],
@@ -57,7 +57,7 @@ controllers.postCreatePosts = async (req, res, next) => {
             { $push: { posts: createPost._id } },
         );
 
-        res.render('pages/dashbord/posts/create-posts');
+        res.redirect('/api/dashbord/create-posts');
     } catch (e) {
         next(e);
     }

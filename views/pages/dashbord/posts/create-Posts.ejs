@@ -39,11 +39,11 @@
                   type="text"
                   name="title"
                   id="title"
-                  class="form-control <%= errors.title ?'is-invalid' : ''%>"
+                  class="form-control <%= error.title ?'is-invalid' : ''%>"
                   value="<%= value.title ? value.title : ''%>"
                 />
                 <div class="invalid-feedback">
-                  <strong><%=errors.title && errors.title%></strong>
+                  <strong><%=error.title && error.title%></strong>
                 </div>
               </div>
               <br>
@@ -52,10 +52,10 @@
                 <textarea
                   name="body"
                   id="tiny-mce-post-body"
-                  class="form-control <%= errors.body ?'is-invalid' : ''%>"
+                  class="form-control <%= error.body ?'is-invalid' : ''%>"
                 ><%= value.body ? value.body : ''%></textarea>
                 <div class="invalid-feedback">
-                  <strong><%=errors.body && errors.body%></strong>
+                  <strong><%=error.body && error.body%></strong>
                 </div>
               </div>
               <br>
@@ -76,12 +76,7 @@
                     >Choose any file</label
                   >
                   <input class="form-control" type="file" id="formFile" name="photo" />
-                  <input
-                      type="submit"
-                      value="Upload"
-                      id="uploadFiles"
-                      class="btn btn-success btn-bg my-2"
-                    />
+                 
                 </div>
               <input
                 type="submit"
