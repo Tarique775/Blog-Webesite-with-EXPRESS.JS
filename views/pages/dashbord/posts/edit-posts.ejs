@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>create-posts</title>
+    <title>edit-posts</title>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
@@ -27,10 +27,10 @@
         <div class="col-md-2"><%-include('../../dashbord-nav.ejs') -%></div>
         <div class="col-md-8 offset-md-1">
           <div class="card card-body my-5">
-            <h4>Create A New Post</h4>
+            <h4>Edit Post</h4>
             
             <form
-              action="/api/dashbord/create-posts"
+              action="/api/dashbord/edit-posts/<%= post._id %>"
               method="POST"
               
               enctype="multipart/form-data"
@@ -42,7 +42,7 @@
                   name="title"
                   id="title"
                   class="form-control <%= error.title ?'is-invalid' : ''%>"
-                  value="<%= value.title ? value.title : ''%>"
+                  value="<%= post.title ? post.title : ''%>"
                 />
                 <div class="invalid-feedback">
                   <strong><%=error.title && error.title%></strong>
@@ -55,7 +55,7 @@
                   name="body"
                   id="tiny-mce-post-body"
                   class="form-control <%= error.body ?'is-invalid' : ''%>"
-                ><%= value.body ? value.body : ''%></textarea>
+                ><%= post.body ? post.body : ''%></textarea>
                 <div class="invalid-feedback">
                   <strong><%=error.body && error.body%></strong>
                 </div>
@@ -69,13 +69,19 @@
                   id="tags"
                   placeholder="tag1,tag2,tag3"
                   class="form-control"
+                  value="<%= post.tags.length > 0 ? post.tags.join(', ') : ''%>"
                 />
               </div>
               <br>
-              
+              <% if(post.thumbnail) { %>
+                <label >Post Thumbnail</label><br>
+                <img src="<%= post.thumbnail %>" id="thumbnail" alt="Post Thumbnail" class="img-thumbnail img-fluid mb-4"  width="400px"
+                height="400px">
+            <% } %>
+              <br>
                 <div class="mb-3">
                   <label for="formFile" class="form-label"
-                    >Choose any file</label
+                    >Choose A Photo</label
                   >
                   <input class="form-control" type="file" id="formFile" name="photo" />
                  
@@ -83,7 +89,7 @@
               <input
                 type="submit"
                 class="btn btn-primary "
-                value="Create Post"
+                value="Edit Post"
               />
             </form>
           </div>

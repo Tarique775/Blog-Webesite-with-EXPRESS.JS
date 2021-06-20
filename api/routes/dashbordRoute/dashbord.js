@@ -5,7 +5,12 @@ const { profileValidator } = require('../../controllers/dashboardControlers/prof
 
 const { postValidatior } = require('../../controllers/dashboardControlers/postsValidation');
 
-const { getCreatePosts, postCreatePosts } = require('../../controllers/dashboardControlers/posts');
+const {
+    getCreatePosts,
+    postCreatePosts,
+    getEditPosts,
+    postEditPosts,
+} = require('../../controllers/dashboardControlers/posts');
 
 const postUpload = require('../../middleware/postMulterUpload');
 
@@ -24,5 +29,15 @@ router.post('/edit-profile', isAuth, profileValidator, dashbordController.postEd
 router.get('/create-posts', isAuth, getCreatePosts);
 
 router.post('/create-posts', isAuth, postUpload.single('photo'), postValidatior, postCreatePosts);
+
+router.get('/edit-posts/:postId', isAuth, getEditPosts);
+
+router.post(
+    '/edit-posts/:postId',
+    isAuth,
+    postUpload.single('photo'),
+    postValidatior,
+    postEditPosts
+);
 
 module.exports = router;

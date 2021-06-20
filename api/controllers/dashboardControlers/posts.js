@@ -31,6 +31,7 @@ controllers.postCreatePosts = async (req, res, next) => {
 
     if (tags) {
         tags = tags.split(',');
+        tags = tags.map((t) => t.trim());
     }
 
     const readTime = readingtime(body).text;
@@ -54,10 +55,78 @@ controllers.postCreatePosts = async (req, res, next) => {
         const createPost = await post.save();
         await Profile.findOneAndUpdate(
             { user: req.user._id },
-            { $push: { posts: createPost._id } },
+            { $push: { posts: createPost._id } }
         );
 
-        res.redirect('/api/dashbord/create-posts');
+        res.redirect(`/api/dashbord/edit-posts/${createPost._id}`);
+    } catch (e) {
+        next(e);
+    }
+};
+
+controllers.getEditPosts = async (req, res, next) => {
+    const { postId } = req.params;
+
+    try {
+        const post = await Post.findOne({ author: req.user._id, _id: postId });
+
+        if (!post) {
+            const error = new Error('404 not found');
+            error.status = 404;
+            throw error;
+        }
+
+        res.render('pages/dashbord/posts/edit-posts', {
+            error: {},
+            post,
+        });
+    } catch (e) {
+        next(e);
+    }
+};
+
+controllers.postEditPosts = async (req, res, next) => {
+    let { title, body, tags } = req.body;
+    const { postId } = req.params;
+    const errors = validationResult(req).formatWith(errorFormetter);
+
+    try {
+        const post = await Post.findOne({ author: req.user._id, _id: postId });
+
+        if (!post) {
+            const error = new Error('404 not found');
+            error.status = 404;
+            throw error;
+        }
+        if (!errors.isEmpty()) {
+            return res.render('pages/dashbord/posts/edit-posts', {
+                error: errors.mapped(),
+                post,
+            });
+        }
+
+        if (tags) {
+            tags = tags.split(',');
+            tags = tags.map((t) => t.trim());
+        }
+        let { thumbnail } = post;
+        if (req.file) {
+            thumbnail = `/uploads/postImage/${req.file.filename}`;
+        }
+
+        const editPost = await Post.findOneAndUpdate(
+            { _id: post._id },
+            {
+                $set: {
+                    title,
+                    body,
+                    tags,
+                    thumbnail,
+                },
+            },
+            { new: true },
+        );
+        res.redirect(`/api/dashbord/edit-posts/${editPost._id}`);
     } catch (e) {
         next(e);
     }
