@@ -1,5 +1,5 @@
 {
-  "name": "eprac",
+  "name": "Blog-Website",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
-  "author": "tarique",
+  "author": "islam.tarique4329@gmail.com",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
