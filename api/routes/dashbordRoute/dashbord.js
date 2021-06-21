@@ -10,6 +10,8 @@ const {
     postCreatePosts,
     getEditPosts,
     postEditPosts,
+    getDeletePosts,
+    getMyPosts,
 } = require('../../controllers/dashboardControlers/posts');
 
 const postUpload = require('../../middleware/postMulterUpload');
@@ -37,7 +39,11 @@ router.post(
     isAuth,
     postUpload.single('photo'),
     postValidatior,
-    postEditPosts
+    postEditPosts,
 );
+
+router.get('/delete-posts/:postId', isAuth, getDeletePosts);
+
+router.get('/posts', isAuth, getMyPosts);
 
 module.exports = router;
