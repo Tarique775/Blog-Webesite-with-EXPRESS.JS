@@ -55,7 +55,7 @@ controllers.postCreatePosts = async (req, res, next) => {
         const createPost = await post.save();
         await Profile.findOneAndUpdate(
             { user: req.user._id },
-            { $push: { posts: createPost._id } },
+            { $push: { posts: createPost._id } }
         );
 
         // res.redirect(`/api/dashbord/edit-posts/${createPost._id}`);
@@ -125,7 +125,7 @@ controllers.postEditPosts = async (req, res, next) => {
                     thumbnail,
                 },
             },
-            { new: true }
+            { new: true },
         );
         res.redirect(`/api/dashbord/edit-posts/${editPost._id}`);
     } catch (e) {
@@ -153,7 +153,7 @@ controllers.getDeletePosts = async (req, res, next) => {
 
 controllers.getMyPosts = async (req, res, next) => {
     try {
-        const posts = await Post.find({ author: req.user._id });
+        const posts = await Post.find({ author: req.user._id }).sort({ _id: -1 });
         res.render('pages/dashbord/posts/my-posts', {
             posts,
         });
