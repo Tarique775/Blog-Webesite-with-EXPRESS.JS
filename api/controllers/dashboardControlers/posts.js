@@ -55,10 +55,11 @@ controllers.postCreatePosts = async (req, res, next) => {
         const createPost = await post.save();
         await Profile.findOneAndUpdate(
             { user: req.user._id },
-            { $push: { posts: createPost._id } }
+            { $push: { posts: createPost._id } },
         );
 
-        res.redirect(`/api/dashbord/edit-posts/${createPost._id}`);
+        // res.redirect(`/api/dashbord/edit-posts/${createPost._id}`);
+        res.redirect('/api/dashbord/posts');
     } catch (e) {
         next(e);
     }
@@ -124,7 +125,7 @@ controllers.postEditPosts = async (req, res, next) => {
                     thumbnail,
                 },
             },
-            { new: true },
+            { new: true }
         );
         res.redirect(`/api/dashbord/edit-posts/${editPost._id}`);
     } catch (e) {
