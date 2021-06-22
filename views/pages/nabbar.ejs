@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><h2>Cyrus</h2></a>
+    <a class="navbar-brand" href="#"><h2>Cyrus ⚔ Blog</h2></a>
     >
     <button
       class="navbar-toggler"
@@ -15,6 +15,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if(token){ %>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle active"
@@ -27,8 +28,10 @@
           >
             Dashbord Menu
           </a>
+
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="/api/dashbord/">DashBord</a></li>
+
             <li><hr class="dropdown-divider" /></li>
             <li>
               <a class="dropdown-item" href="/api/dashbord/create-posts"
@@ -36,7 +39,6 @@
               >
             </li>
 
-            <% if(token){ %>
             <li><hr class="dropdown-divider" /></li>
             <li>
               <a class="dropdown-item" href="/api/dashbord/posts">My Posts</a>
@@ -67,16 +69,18 @@
             </li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="/api/user/logout">Logout</a></li>
-            <% } %>
           </ul>
         </li>
-
-        <% if(token){ %>
+        <% } %> <% if(token){ %>
         <li class="nav-item">
           <a class="nav-link" href="/api/user/logout">Logout </a>
         </li>
         <% } else { %>
-
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/api/dashbord/"
+            >DashBord</a
+          >
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/api/user/register">Registation</a>
         </li>
