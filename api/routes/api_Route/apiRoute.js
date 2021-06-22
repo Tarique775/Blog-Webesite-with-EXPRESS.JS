@@ -9,8 +9,8 @@ const {
 
 const router = express.Router();
 
-router.post('/post/comment/:postId', isAuth, postCommentController);
+router.post('/post/comments/:postId', isAuth, postCommentController);
 
-router.post('/post/replies/:commentId', isAuth, postRepliesController);
+router.post('/post/comments/replies/:commentId', isAuth, postRepliesController);
 
 module.exports = router;
