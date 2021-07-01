@@ -13,6 +13,7 @@ window.onload = function () {
         height: 300,
         automatic_uploads: true,
         images_upload_url: '/api/dashbord/uploads/postimage',
+        relative_urls: false,
         images_upload_handler(blobInfo, success, failure) {
             const header = new Headers();
             header.append('Accept', 'Application/JSON');

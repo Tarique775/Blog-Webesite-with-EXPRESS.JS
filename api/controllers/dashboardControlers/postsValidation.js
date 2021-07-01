@@ -1,7 +1,7 @@
 const { body } = require('express-validator');
 const cheerio = require('cheerio');
 
-const postValidatior = [
+const postValidator = [
     body('title')
         .not()
         .isEmpty()
@@ -27,4 +27,4 @@ const postValidatior = [
 
 const errorFormetter = (err) => err.msg;
 
-module.exports = { postValidatior, errorFormetter };
+module.exports = { postValidator, errorFormetter };

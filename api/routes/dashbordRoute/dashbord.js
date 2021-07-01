@@ -3,7 +3,7 @@ const dashbordController = require('../../controllers/dashboardControlers/dashbo
 const { isAuth } = require('../../middleware/authentication');
 const { profileValidator } = require('../../controllers/dashboardControlers/profileValidation');
 
-const { postValidatior } = require('../../controllers/dashboardControlers/postsValidation');
+const { postValidator } = require('../../controllers/dashboardControlers/postsValidation');
 
 const {
     getCreatePosts,
@@ -30,7 +30,7 @@ router.post('/edit-profile', isAuth, profileValidator, dashbordController.postEd
 
 router.get('/create-posts', isAuth, getCreatePosts);
 
-router.post('/create-posts', isAuth, postUpload.single('photo'), postValidatior, postCreatePosts);
+router.post('/create-posts', isAuth, postUpload.single('photo'), postValidator, postCreatePosts);
 
 router.get('/edit-posts/:postId', isAuth, getEditPosts);
 
@@ -38,8 +38,8 @@ router.post(
     '/edit-posts/:postId',
     isAuth,
     postUpload.single('photo'),
-    postValidatior,
-    postEditPosts
+    postValidator,
+    postEditPosts,
 );
 
 router.get('/delete-posts/:postId', isAuth, getDeletePosts);
