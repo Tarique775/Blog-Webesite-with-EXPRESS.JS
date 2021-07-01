@@ -14,13 +14,13 @@ controllers.uploadProfilePics = async (req, res, next) => {
                 await Profile.findOneAndUpdate(
                     { user: req.user._id },
                     { $set: { profilePics } },
-                    { new: true }
+                    { new: true },
                 );
 
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/api/dashbord/edit-profile');
@@ -28,7 +28,7 @@ controllers.uploadProfilePics = async (req, res, next) => {
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/api/dashbord/create-profile');
@@ -53,13 +53,13 @@ controllers.removeProfilePics = (req, res, next) => {
                 await Profile.findOneAndUpdate(
                     { user: req.user._id },
                     { $set: { profilePics: defaultProfilePic } },
-                    { new: true }
+                    { new: true },
                 );
 
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics: defaultProfilePic } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/api/dashbord/edit-profile');
@@ -67,7 +67,7 @@ controllers.removeProfilePics = (req, res, next) => {
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics: defaultProfilePic } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/api/dashbord/create-profile');
