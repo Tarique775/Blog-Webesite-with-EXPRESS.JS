@@ -7,12 +7,16 @@ const { errorFormet } = require('./loginValidator');
 const controllers = {};
 
 controllers.getRegister = (req, res, next) => {
-    res.render('pages/user/register', { error: {}, value: {}, success: '' });
+    res.render('pages/user/register', {
+        error: {},
+        value: {},
+        success: '',
+    });
 };
 
 controllers.postRegister = async (req, res, next) => {
-    const {
- userName, email, password, confirmPassword, } = req.body;
+    const { userName, email, password, confirmPassword 
+} = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -136,7 +140,7 @@ controllers.postChangePassword = async (req, res, next) => {
 
         const chngPass = await User.findOneAndUpdate(
             { _id: req.user._id },
-            { $set: { password: hash } },
+            { $set: { password: hash } }
         );
         if (chngPass) {
             return res.redirect('/api/user/logout');

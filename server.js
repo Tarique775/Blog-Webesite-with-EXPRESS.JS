@@ -31,6 +31,7 @@ mongoDBConnect();
 // const multer = require('multer');
 const userRoute = require('./api/routes/userRoute/user');
 const dashbordRoute = require('./api/routes/dashbordRoute/dashbord');
+const blogsRoute = require('./api/routes/BlogsRoute/BlogsRoute');
 const uploadProfilePicsRoute = require('./api/routes/uploadProfilepicRoute/uploadProfilepics');
 const { auth } = require('./api/middleware/authentication');
 const locals = require('./api/middleware/locals');
@@ -46,11 +47,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(auth());
 app.use(locals());
 
+app.use('/blogs', blogsRoute);
 app.use('/api/user', userRoute);
 app.use('/api/dashbord', dashbordRoute, uploadProfilePicsRoute);
-app.get('/', (req, res, next) => {
-    res.render('pages/home');
-});
 
 app.use((req, res, next) => {
     res.render('pages/404NotFound');
