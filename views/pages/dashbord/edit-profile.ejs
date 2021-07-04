@@ -52,7 +52,6 @@
                       value="Upload Profile Picture"
                       id="uploadProfilePics"
                       class="btn btn-info btn-sm my-2"
-                      style="display: <%= user.profilePics.includes('default.png') ? 'block' : 'none' %>"
                       onclick="document.getElementById('profilePicsFile').click()"
                     />
                     <input
@@ -67,7 +66,6 @@
                       value="Confirm"
                       id="confirmProfilePics"
                       class="btn btn-warning btn-sm my-2"
-                      style="display: <%= user.profilePics.includes('default.png') ? 'block' : 'none' %>"
                     />
                   </form>
                   <form
