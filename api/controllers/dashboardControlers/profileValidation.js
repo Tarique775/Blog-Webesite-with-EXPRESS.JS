@@ -11,8 +11,7 @@ const linkValidator = (value) => {
 };
 
 const profileValidator = [
-    body('name').isLength({ max: 50 }).not().isEmpty()
-.withMessage('Please provide a Name')
+    body('name').isLength({ max: 50 }).not().isEmpty().withMessage('Please provide a Name')
 .trim(),
 
     body('title')
@@ -22,8 +21,7 @@ const profileValidator = [
         .withMessage('Please provide a Title')
         .trim(),
 
-    body('bio').isLength({ max: 50 }).not().isEmpty()
-.withMessage('Please provide a Bio')
+    body('bio').isLength({ max: 50 }).not().isEmpty().withMessage('Please provide a Bio')
 .trim(),
 
     body('website').custom(linkValidator).trim(),

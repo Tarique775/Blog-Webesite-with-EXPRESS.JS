@@ -39,7 +39,7 @@ router.post(
     isAuth,
     postUpload.single('photo'),
     postValidator,
-    postEditPosts,
+    postEditPosts
 );
 
 router.get('/delete-posts/:postId', isAuth, getDeletePosts);
