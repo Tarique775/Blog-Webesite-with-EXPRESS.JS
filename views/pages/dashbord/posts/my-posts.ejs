@@ -45,7 +45,7 @@
                       >Create Post Now</a
                     >
                   </div>
-                  <% } else { %> <% for (let post of posts) { %>
+                  <% } else { %> <% for (let post of posts.reverse()) { %>
                   <div class="card col-sm-3 m-3">
                     <% if (post.thumbnail) { %>
                     <img

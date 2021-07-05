@@ -1,9 +1,9 @@
-const express = require('express');
+// const express = require('express');
 
-const { getBlogController } = require('../../controllers/blogsController/blogController');
+// const { getBlogController } = require('../../controllers/blogsController/blogController');
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get('/', getBlogController);
+// router.get('/', getBlogController);
 
-module.exports = router;
+// module.exports = router;

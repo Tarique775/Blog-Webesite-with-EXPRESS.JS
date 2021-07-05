@@ -9,7 +9,12 @@ module.exports = () => (req, res, next) => {
         let text = node.text();
 
         text = text.replace(/(\r\n|\n|\r)/gm, '');
-        return text;
+
+        if (text.length <= 100) {
+            return text;
+        }
+
+        return `${text.substr(0, 100)} ...`;
     };
     res.locals.moment = (time) => moment(time).fromNow();
     next();

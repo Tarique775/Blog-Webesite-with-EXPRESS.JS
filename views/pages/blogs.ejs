@@ -18,8 +18,8 @@
     />
   </head>
   <body class="bg-light">
-    <%- include('../nabbar.ejs') -%>
-    <div class="container my-2">
+    <%- include('./nabbar.ejs') -%>
+    <div class="container">
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <section class="my-5">
@@ -29,23 +29,23 @@
               >Latest</a
             >
             <a
-              href="/home?filter=week"
+              href="/blogs?filter=week"
               class="btn <%=filter==='week' ? 'btn-primary' : 'btn-secondary' %>"
               >Week</a
             >
             <a
-              href="/home?filter=month"
+              href="/blogs?filter=month"
               class="btn <%=filter==='month' ? 'btn-primary' : 'btn-secondary' %>"
               >Month</a
             >
             <a
-              href="/home?filter=all"
+              href="/blogs?filter=all"
               class="btn <%=filter==='all' ? 'btn-primary' : 'btn-secondary' %>"
               >All</a
             >
           </section>
           <section>
-            <% if(posts.length===0) { %>
+            <% if(posts.length === 0) { %>
             <p>There is no post</p>
             <% } else { %> <% for(let post of posts) { %>
             <div class="card card-body mb-3">
@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    <%- include('../footer.ejs') -%>
+    <%- include('./footer.ejs') -%>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
