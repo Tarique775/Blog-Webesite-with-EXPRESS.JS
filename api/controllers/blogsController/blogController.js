@@ -49,14 +49,25 @@ const controllers = {};
 
 controllers.getBlogController = async (req, res, next) => {
     const filter = req.query.filter || 'latest';
+    const currentPage = parseInt(req.query.page) || 1;
+    const itemPerPage = 2;
     const { filterObj, order } = genFilter(filter.toLowerCase());
     try {
         const posts = await Post.find(filterObj)
             .populate('author', 'userName')
-            .sort(order === 1 ? '-createdAt' : 'createdAt');
+            .sort(order === 1 ? '-createdAt' : 'createdAt')
+            .skip(itemPerPage * currentPage - itemPerPage)
+
+            .limit(itemPerPage);
+
+        const totalPost = await Post.countDocuments();
+        const totalPage = Math.ceil(totalPost / itemPerPage);
         res.render('pages/blogs', {
             filter,
             posts,
+            totalPage,
+            currentPage,
+            itemPerPage,
         });
     } catch (e) {
         next(e);
