@@ -14,13 +14,21 @@
   </head>
   <body class="bg-light">
     <%- include('../nabbar.ejs') -%>
-    <div class="container my-container my-5">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <h1>Wellcome TO DashBord</h1>
+        <div class="col-md-2"><%-include('../dashbord-nav.ejs') -%></div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <div class="card card-body my-5">
+                <h4>My DashBord</h4>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <%- include('../footer.ejs') -%>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"

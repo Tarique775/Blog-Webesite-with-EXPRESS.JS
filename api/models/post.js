@@ -13,7 +13,7 @@ const postSchema = new Schema(
         body: {
             type: String,
             required: true,
-            maxLength: 5000,
+            maxLength: 10000,
             trim: true,
         },
         author: {
@@ -46,7 +46,7 @@ const postSchema = new Schema(
             },
         ],
     },
-    { timestamps: true }
+    { timestamps: true },
 );
 
 const Post = mongoose.model('Post', postSchema);

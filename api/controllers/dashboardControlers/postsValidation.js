@@ -18,7 +18,7 @@ const postValidator = [
             const node = cheerio.load(value);
             const text = node.text();
 
-            if (text.length > 5000) {
+            if (text.length > 10000) {
                 throw new Error('Body can not be greater than 5000 chars!');
             }
             return true;
