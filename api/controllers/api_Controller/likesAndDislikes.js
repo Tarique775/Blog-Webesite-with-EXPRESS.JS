@@ -50,14 +50,13 @@ controllers.getLikesController = async (req, res, next) => {
 controllers.getDislikesController = async (req, res, next) => {
     const { postId } = req.params;
 
-    let disliked = null;
-
     if (!req.user) {
         return res.status(403).json({
             error: 'You are not authenticate user!',
         });
     }
 
+    let disliked = null;
     const userId = req.user._id;
 
     try {

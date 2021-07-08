@@ -31,6 +31,7 @@ mongoDBConnect();
 // const multer = require('multer');
 const userRoute = require('./api/routes/userRoute/user');
 const dashbordRoute = require('./api/routes/dashbordRoute/dashbord');
+const apiRoute = require('./api/routes/api_Route/apiRoute');
 // const blogsRoute = require('./api/routes/BlogsRoute/BlogsRoute');
 const uploadProfilePicsRoute = require('./api/routes/uploadProfilepicRoute/uploadProfilepics');
 const { auth } = require('./api/middleware/authentication');
@@ -49,6 +50,7 @@ app.use(auth());
 app.use(locals());
 
 app.use('/blogs', getBlogController);
+app.use('/api', apiRoute);
 app.use('/api/user', userRoute);
 app.use('/api/dashbord', dashbordRoute, uploadProfilePicsRoute);
 

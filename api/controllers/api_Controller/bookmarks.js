@@ -5,14 +5,13 @@ const controllers = {};
 controllers.getBookMarksController = async (req, res, next) => {
     const { postId } = req.params;
 
-    let bookmarked = null;
-
     if (!req.user) {
         return res.status(403).json({
             error: 'You are not authenticate user!',
         });
     }
 
+    let bookmarked = null;
     const userId = req.user._id;
 
     try {

@@ -1,6 +1,7 @@
 const moment = require('moment');
 
 const Post = require('../../models/post');
+const Profile = require('../../models/profile');
 
 function genDate(days) {
     const date = moment().subtract(days, 'days');
@@ -62,12 +63,24 @@ controllers.getBlogController = async (req, res, next) => {
 
         const totalPost = await Post.countDocuments();
         const totalPage = Math.ceil(totalPost / itemPerPage);
+
+        let bookmarks = [];
+
+        if (req.user) {
+            const profile = await Profile.findOne({ user: req.user._id });
+
+            if (profile) {
+                bookmarks = profile.bookmarks;
+            }
+        }
+
         res.render('pages/blogs', {
             filter,
             posts,
             totalPage,
             currentPage,
             itemPerPage,
+            bookmarks,
         });
     } catch (e) {
         next(e);
