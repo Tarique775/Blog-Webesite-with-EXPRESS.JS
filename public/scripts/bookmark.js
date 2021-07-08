@@ -19,9 +19,9 @@ window.onload = function () {
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.bookmarked) {
-                        targets.innerHTML = '<i class="fas fa-star"></i>';
+                        targets.innerHTML = '<i class="fas fa-bookmark"></i>';
                     } else {
-                        targets.innerHTML = '<i class="far fa-star"></i>';
+                        targets.innerHTML = '<i class="far fa-bookmark"></i>';
                     }
                 })
                 .catch((err) => {
