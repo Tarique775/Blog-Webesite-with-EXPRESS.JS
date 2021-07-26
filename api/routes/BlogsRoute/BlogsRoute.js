@@ -1,9 +1,14 @@
-// const express = require('express');
+const express = require('express');
 
-// const { getBlogController } = require('../../controllers/blogsController/blogController');
+const {
+    getBlogController,
+    singlePostGetController,
+} = require('../../controllers/blogsController/blogController');
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get('/', getBlogController);
+router.get('/', getBlogController);
 
-// module.exports = router;
+router.get('/:postId', singlePostGetController);
+
+module.exports = router;

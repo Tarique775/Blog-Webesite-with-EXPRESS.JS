@@ -36,7 +36,7 @@ const apiRoute = require('./api/routes/api_Route/apiRoute');
 const uploadProfilePicsRoute = require('./api/routes/uploadProfilepicRoute/uploadProfilepics');
 const { auth } = require('./api/middleware/authentication');
 const locals = require('./api/middleware/locals');
-const { getBlogController } = require('./api/controllers/blogsController/blogController');
+const blogRoute = require('./api/routes/BlogsRoute/BlogsRoute');
 
 const app = express();
 app.use(express.static('public'));
@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(auth());
 app.use(locals());
 
-app.use('/blogs', getBlogController);
+app.use('/blogs', blogRoute);
 app.use('/api', apiRoute);
 app.use('/api/user', userRoute);
 app.use('/api/dashbord', dashbordRoute, uploadProfilePicsRoute);

@@ -5,14 +5,12 @@ const controllers = {};
 controllers.getLikesController = async (req, res, next) => {
     const { postId } = req.params;
 
-    let liked = null;
-
     if (!req.user) {
         return res.status(403).json({
             error: 'You are not authenticate user!',
         });
     }
-
+    let liked = null;
     const userId = req.user._id;
 
     try {
@@ -32,7 +30,7 @@ controllers.getLikesController = async (req, res, next) => {
             liked = true;
         }
 
-        const updatePost = Post.findById(postId);
+        const updatePost = await Post.findById(postId);
 
         res.status(200).json({
             liked,
@@ -76,7 +74,7 @@ controllers.getDislikesController = async (req, res, next) => {
             disliked = true;
         }
 
-        const updatePost = Post.findById(postId);
+        const updatePost = await Post.findById(postId);
 
         res.status(200).json({
             disliked,

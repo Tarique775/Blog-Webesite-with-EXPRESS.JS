@@ -26,7 +26,8 @@ window.onload = function () {
                 })
                 .catch((err) => {
                     console.error(err.response.data);
-                    alert(err.response.data.error);
+                    const alert = err.response.data.error;
+                    alert();
                 });
         });
     });

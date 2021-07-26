@@ -87,4 +87,49 @@ controllers.getBlogController = async (req, res, next) => {
     }
 };
 
+controllers.singlePostGetController = async (req, res, next) => {
+    const { postId } = req.params;
+    try {
+        const post = await Post.findById(postId)
+            .populate('author', 'userName profilePics')
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'user',
+                    select: 'userName profilePics',
+                },
+            })
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'replies.user',
+                    select: 'userName profilePics',
+                },
+            });
+
+        if (!post) {
+            const error = new Error('404 Page Not Found');
+            error.status = 404;
+            throw error;
+        }
+
+        let bookmarks = [];
+
+        if (req.user) {
+            const profile = await Profile.findOne({ user: req.user._id });
+
+            if (profile) {
+                bookmarks = profile.bookmarks;
+            }
+        }
+
+        res.render('pages/singlePost', {
+            post,
+            bookmarks,
+        });
+    } catch (e) {
+        next(e);
+    }
+};
+
 module.exports = controllers;
