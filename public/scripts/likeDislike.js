@@ -2,6 +2,20 @@ window.onload = function () {
     const likeBtn = document.getElementById('likeBtn');
     const dislikeBtn = document.getElementById('dislikeBtn');
 
+    function reqlikeDislike(type, postId) {
+        const headers = new Headers();
+        headers.append('Accept', 'Application/JSON');
+        headers.append('Content-Type', 'Application/JSON');
+
+        const req = new Request(`/api/${type}/${postId}`, {
+            method: 'GET',
+            headers,
+            mode: 'cors',
+        });
+
+        return fetch(req);
+    }
+
     likeBtn.addEventListener('click', (e) => {
         const postId = likeBtn.dataset.post;
         reqlikeDislike('likes', postId)
@@ -40,19 +54,6 @@ window.onload = function () {
             });
     });
 
-    function reqlikeDislike(type, postId) {
-        const headers = new Headers();
-        headers.append('Accept', 'Application/JSON');
-        headers.append('Content-Type', 'Application/JSON');
-
-        const req = new Request(`/api/${type}/${postId}`, {
-            method: 'GET',
-            headers,
-            mode: 'cors',
-        });
-
-        return fetch(req);
-    }
     /// bookmark
     const bookmarks = document.getElementsByClassName('bookmark');
     [...bookmarks].forEach((bookmark) => {
