@@ -21,7 +21,7 @@
         <% if(token && user.profile){ %>
         <li class="nav-item dropdown">
           <a
-            class="nav-link dropdown-toggle active"
+            class="nav-link dropdown-toggle"
             aria-current="page"
             href="#"
             id="navbarDropdownMenuLink"
@@ -76,7 +76,9 @@
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="/api/user/logout">Logout</a></li>
+            <li>
+              <a class="dropdown-item" href="/api/user/logout">Logout</a>
+            </li>
           </ul>
         </li>
         <% } %> <% if(token){ %>

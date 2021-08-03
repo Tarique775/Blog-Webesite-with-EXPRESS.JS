@@ -55,14 +55,20 @@ controllers.postRepliesController = async (req, res, next) => {
     const reply = {
         body,
         user: req.user._id,
+        createAt: new Date(),
     };
 
     try {
-        await Comment.findOneAndUpdate({ _id: commentId }, { $push: { replies: reply } });
+        const comment_reply = await Comment.findOneAndUpdate(
+            { _id: commentId },
+            { $push: { replies: reply } },
+        );
 
         res.status(201).json({
             ...reply,
             profilePics: req.user.profilePics,
+            userName: req.user.userName,
+            createAt: comment_reply.replies.createAt,
         });
     } catch (e) {
         console.log(e);

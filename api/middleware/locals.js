@@ -16,6 +16,6 @@ module.exports = () => (req, res, next) => {
 
         return `${text.substr(0, 100)}...`;
     };
-    res.locals.moment = (time) => moment(time).fromNow();
+    res.locals.moments = (time) => moment(time).fromNow();
     next();
 };

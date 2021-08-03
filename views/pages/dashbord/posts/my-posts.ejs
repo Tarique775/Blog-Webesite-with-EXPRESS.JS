@@ -35,7 +35,7 @@
             <div class="col-md-8 offset-1">
               <div class="card card-body my-5">
                 <h4>List Of My Posts</h4>
-                <div class="row">
+                <div class="row ps-4">
                   <% if(posts.length===0) { %>
                   <div class="text-center text-muted">
                     <p>There is no posts availabe right now</p>
@@ -46,7 +46,7 @@
                     >
                   </div>
                   <% } else { %> <% for (let post of posts.reverse()) { %>
-                  <div class="card col-sm-3 m-4">
+                  <div class="card col-sm-5 m-4">
                     <% if (post.thumbnail) { %>
                     <img
                       src="<%= post.thumbnail %>"

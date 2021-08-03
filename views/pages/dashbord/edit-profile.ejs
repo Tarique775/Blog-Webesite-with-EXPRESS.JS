@@ -29,7 +29,7 @@
           <div class="row">
             <div class="col-md-8 offset-md-1">
               <div class="card card-body my-5">
-                <h4>Edit Your Profile</h4>
+                <h4 class="pb-2">Edit Your Profile</h4>
                 <div class="profile-pics">
                   <img
                     src="<%=user.profilePics%>"
@@ -86,7 +86,7 @@
                 <div>
                   <form action="/api/dashbord/edit-profile" method="POST">
                     <div class="form-group">
-                      <label for="name">Enter Your Name</label>
+                      <label for="name" class="pb-2">Enter Your Name</label>
                       <input
                         type="text"
                         class="form-control <%= error.name ?'is-invalid' : ''%>"
@@ -101,7 +101,7 @@
                     </div>
                     <br />
                     <div class="form-group">
-                      <label for="email">Enter Your Email</label>
+                      <label for="email" class="pb-2">Enter Your Email</label>
                       <input
                         type="email"
                         class="form-control"
@@ -114,7 +114,7 @@
                     </div>
                     <br />
                     <div class="form-group">
-                      <label for="title">Enter Your Title</label>
+                      <label for="title" class="pb-2">Enter Your Title</label>
                       <input
                         type="text"
                         class="form-control <%= error.title ?'is-invalid' : ''%>"
@@ -129,7 +129,7 @@
                     </div>
                     <br />
                     <div class="form-group">
-                      <label for="bio">Enter Your Bio</label>
+                      <label for="bio" class="pb-2">Enter Your Bio</label>
                       <textarea
                         name="bio"
                         id="bio"
@@ -213,7 +213,7 @@
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">
+                    <button type="submit" class="btn btn-primary mb-2 mt-2">
                       Update Profile
                     </button>
                   </form>
