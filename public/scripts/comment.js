@@ -81,9 +81,9 @@ function createComment(comment) {
                 comment.user.profilePics
             }" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/>
         </div>
-        <div class="flex-grow-0 my-3">
+        <div class="flex-grow-0 col-md-9 my-3">
             <h6>${comment.user.userName}</h6>
-            <div class="card card-body bg-light" style="width: 23rem">
+            <div class="border rounded bg-light px-2 py-1">
             <p class="card-text">${comment.body}</p>
             </div>
             <small>${moment(comment.createdAt).fromNow()}</small>
@@ -109,9 +109,9 @@ function createReplyElement(reply) {
     reply.profilePics
 }" class="align-self-start me-3 rounded-circle" style="width: 40px"/>
 
-    <div class="flex-grow-1">
+    <div class="flex-grow-0 col-md-10">
         <h6>${reply.userName}</h6>
-        <div class="card card-body bg-light" style="width: 19.5rem">
+        <div class="border rounded bg-light px-2 py-1">
         <p class="card-text">${reply.body}</p>
         </div>
         <small>${moment(reply.createAt).fromNow()}</small>
