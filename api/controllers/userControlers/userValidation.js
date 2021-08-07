@@ -15,7 +15,7 @@ const userValidator = [
 
     body('email')
         .matches(
-            /^([a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,7})$/g,
+            /^([a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,7})$/gm
         )
         .withMessage('Please provide a valid email')
         .custom(async (email) => {
@@ -27,9 +27,9 @@ const userValidator = [
         .trim(),
 
     body('password')
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/g)
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm)
         .withMessage(
-            'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+            'Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character',
         )
         .trim(),
 

@@ -38,10 +38,12 @@
           </div>
           <% } %>
           <div class="card card-body my-4">
-            <h1>Registation</h1>
-            <form action="/api/user/register" method="POST">
+            <h1 class="text-center mb-3">Registation</h1>
+            <form class="mx-5" action="/api/user/register" method="POST">
               <div class="form-group">
-                <strong><label for="username">UserName</label></strong>
+                <strong
+                  ><label class="mb-2" for="username">UserName</label></strong
+                >
                 <input
                   type="text"
                   class="form-control <%= error.userName ?'is-invalid' : ''%>"
@@ -55,7 +57,7 @@
               </div>
               <br />
               <div class="form-group">
-                <strong><label for="email">Email</label></strong>
+                <strong><label class="mb-2" for="email">Email</label></strong>
                 <input
                   type="email"
                   class="form-control <%= error.email ?'is-invalid' : ''%>"
@@ -69,7 +71,9 @@
               </div>
               <br />
               <div class="form-group">
-                <strong><label for="password">Password</label></strong>
+                <strong
+                  ><label class="mb-2" for="password">Password</label></strong
+                >
                 <input
                   type="password"
                   class="form-control <%= error.password ?'is-invalid' : ''%>"
@@ -77,14 +81,25 @@
                   name="password"
                   id="password"
                 />
+                <% if(!error.password) {%>
+                <div class="d-flex">
+                  <small style="color: green"
+                    >Minimum 8 characters, at least 1 uppercase letter, 1
+                    lowercase letter, 1 number and 1 special character</small
+                  >
+                </div>
+                <%}else {%>
                 <div class="invalid-feedback">
                   <strong><%=error.password && error.password%></strong>
                 </div>
+                <%}%>
               </div>
               <br />
               <div class="form-group">
                 <strong
-                  ><label for="confirmPassword">ConfirmPassword</label></strong
+                  ><label class="mb-2" for="confirmPassword"
+                    >ConfirmPassword</label
+                  ></strong
                 >
                 <input
                   type="password"

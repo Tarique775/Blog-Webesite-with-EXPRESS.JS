@@ -1,4 +1,4 @@
-const socket = io('http://localhost:5000');
+const socket = io(`${process.env.APP_URL}`);
 
 const comment = document.getElementById('comment');
 const commentHolder = document.getElementById('comment-holder');
@@ -97,7 +97,7 @@ function createComment(comment) {
             </div>
             <div class="flex-grow-0 col-md-9 my-3">
                 <h6>${comment.user.userName}</h6>
-                <div class="border rounded bg-light px-2 py-1">
+                <div class="border rounded-3 bg-light px-2 py-1">
                 <p class="card-text">${comment.body}</p>
                 </div>
                 <small>${moment(comment.createdAt).fromNow()}</small>
@@ -125,7 +125,7 @@ function createReplyElement(reply) {
     
         <div class="flex-grow-0 col-md-10">
             <h6>${reply.userName}</h6>
-            <div class="border rounded bg-light px-2 py-1">
+            <div class="border rounded-3 bg-light px-2 py-1">
             <p class="card-text">${reply.body}</p>
             </div>
             <small>${moment(reply.createAt).fromNow()}</small>

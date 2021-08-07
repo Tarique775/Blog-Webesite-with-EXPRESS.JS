@@ -17,12 +17,12 @@
     <div class="container my-container my-5">
       <div class="row">
         <div class="col-md-6 offset-md-3">
-          <div class="card card-body my-4">
-            <h1>Login</h1>
+          <div class="card card-body rounded-3 my-4">
+            <h1 class="text-center mb-3">Login</h1>
 
             <% if(Email !=''){ %>
             <div
-              class="alert alert-warning alert-dismissible fade show"
+              class="alert alert-warning alert-dismissible fade show mx-5"
               role="alert"
             >
               <strong><%=Email%></strong>
@@ -35,7 +35,7 @@
             </div>
             <% } if(Password !=''){ %>
             <div
-              class="alert alert-warning alert-dismissible fade show"
+              class="alert alert-warning alert-dismissible fade show mx-5"
               role="alert"
             >
               <strong><%=Password%></strong>
@@ -47,9 +47,9 @@
               ></button>
             </div>
             <% } %>
-            <form action="/api/user/login" method="POST">
+            <form class="mx-5" action="/api/user/login" method="POST">
               <div class="form-group">
-                <strong><label for="email">Email</label></strong>
+                <strong><label class="mb-2" for="email">Email</label></strong>
                 <input
                   type="email"
                   class="form-control <%= error.email ? 'is-invalid' : ''%>"
@@ -62,7 +62,9 @@
               </div>
               <br />
               <div class="form-group">
-                <strong><label for="password">Password</label></strong>
+                <strong
+                  ><label class="mb-2" for="password">Password</label></strong
+                >
                 <input
                   type="password"
                   class="form-control <%= error.password ? 'is-invalid' : ''%>"

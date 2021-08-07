@@ -67,7 +67,7 @@ controllers.postRepliesController = async (req, res, next) => {
     try {
         const comment_reply = await Comment.findOneAndUpdate(
             { _id: commentId },
-            { $push: { replies: reply } }
+            { $push: { replies: reply } },
         );
 
         // global.io.emit('new_reply', {
