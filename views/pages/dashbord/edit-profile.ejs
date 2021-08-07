@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -34,7 +33,7 @@
                   <img
                     src="<%=user.profilePics%>"
                     alt="Profile Pics"
-                    class="img-thumbnail img-fluid"
+                    class="img-thumbnail img-fluid rounded-3"
                     id="profilePics"
                     width="200px"
                     height="200px"
@@ -47,26 +46,53 @@
                     id="profilePicsForm"
                     enctype="multipart/form-data"
                   >
-                    <input
+                    <button
                       type="button"
-                      value="Upload Profile Picture"
-                      id="uploadProfilePics"
-                      class="btn btn-info btn-sm my-2"
-                      onclick="document.getElementById('profilePicsFile').click()"
-                    />
-                    <input
-                      type="file"
-                      name="profilePics"
-                      id="profilePicsFile"
-                      accept="image/*"
-                      style="display: none"
-                    />
-                    <input
-                      type="submit"
-                      value="Confirm"
-                      id="confirmProfilePics"
-                      class="btn btn-warning btn-sm my-2"
-                    />
+                      class="btn btn-primary btn-sm my-2"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      Upload Profile Picture
+                    </button>
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">
+                              Uploading Profile Picture
+                            </h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Please Choose File</p>
+
+                            <input
+                              type="file"
+                              name="profilePics"
+                              id="profilePicsFile"
+                              accept="image/*"
+                            />
+                            <input
+                              type="submit"
+                              value="Confirm"
+                              id="confirmProfilePics"
+                              class="btn btn-primary"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </form>
                   <form
                     action="/api/dashbord/uploads/removeProfilePics"

@@ -9,6 +9,8 @@ const cookieParser = require('cookie-parser');
 
 const mongoose = require('mongoose');
 
+const http = require('http');
+
 // const config = require('config');
 
 const mongoDBConnect = async () => {
@@ -29,16 +31,24 @@ const mongoDBConnect = async () => {
 mongoDBConnect();
 
 // const multer = require('multer');
+const app = express();
+
+const server = http.createServer(app);
+
+const io = require('socket.io')(server);
+
+global.io = io;
+
 const userRoute = require('./api/routes/userRoute/user');
 const dashbordRoute = require('./api/routes/dashbordRoute/dashbord');
 const apiRoute = require('./api/routes/api_Route/apiRoute');
+const searchRoute = require('./api/routes/searchRoute');
 // const blogsRoute = require('./api/routes/BlogsRoute/BlogsRoute');
 const uploadProfilePicsRoute = require('./api/routes/uploadProfilepicRoute/uploadProfilepics');
 const { auth } = require('./api/middleware/authentication');
 const locals = require('./api/middleware/locals');
 const blogRoute = require('./api/routes/BlogsRoute/BlogsRoute');
 
-const app = express();
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(morgan('dev'));
@@ -53,7 +63,7 @@ app.use('/blogs', blogRoute);
 app.use('/api', apiRoute);
 app.use('/api/user', userRoute);
 app.use('/api/dashbord', dashbordRoute, uploadProfilePicsRoute);
-
+app.use('/search', searchRoute);
 app.use((req, res, next) => {
     res.render('pages/404NotFound');
     // res.status(404).json({ message: 'not found!' });
@@ -76,6 +86,6 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
     console.log(`listen on port ${process.env.PORT}`);
 });

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs</title>
+    <style>
+      #hober:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <script src="https://kit.fontawesome.com/e23e3d5407.js"></script>
+  </head>
+  <body class="bg-light">
+    <%- include('../nabbar.ejs') -%>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <section class="my-5">
+            <a
+              href="/blogs?filter=latest"
+              class="btn <%=filter==='latest' ? 'btn-primary' : 'btn-secondary' %>"
+              >Latest</a
+            >
+            <a
+              href="/blogs?filter=week"
+              class="btn <%=filter==='week' ? 'btn-primary' : 'btn-secondary' %>"
+              >Week</a
+            >
+            <a
+              href="/blogs?filter=month"
+              class="btn <%=filter==='month' ? 'btn-primary' : 'btn-secondary' %>"
+              >Month</a
+            >
+            <a
+              href="/blogs?filter=all"
+              class="btn <%=filter==='all' ? 'btn-primary' : 'btn-secondary' %>"
+              >All</a
+            >
+          </section>
+          <section>
+            <% if(posts.length === 0) { %>
+            <p>There is no post</p>
+            <% } else { %> <% for(let post of posts) { %>
+            <div class="card card-body mb-3">
+              <% if (post.thumbnail) { %>
+              <img class="img-fluid mb-2" src="<%= post.thumbnail %>" />
+              <% } %>
+              <a
+                href="/blogs/<%= post._id %>"
+                style="color: #222222; text-decoration: none"
+              >
+                <h5 id="hober"><%=post.title%></h5>
+                <p id="hober" class="mb-4"><%=truncate(post.body)%></p></a
+              >
+              <div class="d-flex">
+                <small>
+                  <%= moments(post.createdAt) %>, Posted By <%=
+                  post.author.userName %>, <%= post.readTime %>
+                </small>
+                <% if(user) { %>
+                <span class="ms-auto bookmark" data-post="<%= post._id %>">
+                  <% if(bookmarks.includes(post._id)){ %>
+                  <i class="fas fa-bookmark"></i>
+                  <% } else { %>
+                  <i class="far fa-bookmark"></i>
+                  <% } %>
+                </span>
+                <% } %>
+              </div>
+            </div>
+            <% } %> <% } %>
+          </section>
+          <section>
+            <% if(totalPage > 1) { %>
+            <nav>
+              <ul class="pagination">
+                <li class="page-item <%= currentPage===1?'disabled':'' %>">
+                  <a
+                    class="page-link"
+                    href="/blogs?filter=<%=filter%>&page=<%=currentPage-1%>"
+                    aria-label="Previous"
+                  >
+                    <span aria-hidden="true">&laquo;Previous</span>
+                  </a>
+                </li>
+                <% for(let i = 1 ; i <= totalPage ; i++) { %>
+                <li class="page-item <%= currentPage === i ?'active' : '' %>">
+                  <a
+                    class="page-link"
+                    href="/blogs?filter=<%=filter%>&page=<%= i %>"
+                    ><%=i%>
+                  </a>
+                </li>
+                <% } %>
+                <li
+                  class="page-item <%= currentPage === totalPage ? 'disabled' : '' %>"
+                >
+                  <a
+                    class="page-link"
+                    href="/blogs?filter=<%= filter %>&page=<%= currentPage + 1 %>"
+                    aria-label="Next"
+                  >
+                    <span aria-hidden="true">Next&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <% } %>
+          </section>
+        </div>
+      </div>
+    </div>
+    <%- include('../footer.ejs') -%>
+    <script src="/scripts/bookmark.js"></script>
+  </body>
+</html>

@@ -32,6 +32,12 @@ controllers.postCommentController = async (req, res, next) => {
             select: 'profilePics userName',
         });
 
+        // global.io.emit('new_comment', {
+        //     body,
+        //     profilePics: req.user.profilePics,
+        //     userName: req.user.userName,
+        // });
+
         return res.status(201).json(commentJSON);
     } catch (e) {
         console.log(e);
@@ -61,8 +67,15 @@ controllers.postRepliesController = async (req, res, next) => {
     try {
         const comment_reply = await Comment.findOneAndUpdate(
             { _id: commentId },
-            { $push: { replies: reply } },
+            { $push: { replies: reply } }
         );
+
+        // global.io.emit('new_reply', {
+        //     body,
+        //     profilePics: req.user.profilePics,
+        //     userName: req.user.userName,
+        //     createAt: comment_reply.replies.createAt,
+        // });
 
         res.status(201).json({
             ...reply,

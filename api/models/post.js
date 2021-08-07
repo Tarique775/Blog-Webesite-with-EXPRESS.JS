@@ -46,7 +46,22 @@ const postSchema = new Schema(
             },
         ],
     },
-    { timestamps: true },
+    { timestamps: true }
+);
+
+postSchema.index(
+    {
+        title: 'text',
+        body: 'text',
+        tags: 'text',
+    },
+    {
+        weights: {
+            title: 5,
+            body: 5,
+            tags: 5,
+        },
+    }
 );
 
 const Post = mongoose.model('Post', postSchema);

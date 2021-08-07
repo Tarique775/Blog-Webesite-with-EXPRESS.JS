@@ -2,7 +2,7 @@ window.onload = function () {
     tinymce.init({
         selector: '#tiny-mce-post-body',
         plugins: [
-            'a11ychecker advcode advlist lists link checklist autolink autosave code',
+            'advlist lists link autolink autosave code',
             'preview',
             'searchreplace',
             'wordcount',

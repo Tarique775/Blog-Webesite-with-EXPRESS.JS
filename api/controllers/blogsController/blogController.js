@@ -74,7 +74,7 @@ controllers.getBlogController = async (req, res, next) => {
             }
         }
 
-        res.render('pages/blogs', {
+        res.render('pages/Blogs/blogs', {
             filter,
             posts,
             totalPage,
@@ -123,7 +123,7 @@ controllers.singlePostGetController = async (req, res, next) => {
             }
         }
 
-        res.render('pages/singlePost', {
+        res.render('pages/Blogs/singlePost', {
             post,
             bookmarks,
         });

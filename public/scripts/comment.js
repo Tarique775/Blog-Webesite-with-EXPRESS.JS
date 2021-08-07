@@ -1,5 +1,18 @@
+const socket = io('http://localhost:5000');
+
 const comment = document.getElementById('comment');
 const commentHolder = document.getElementById('comment-holder');
+// const parent = document.getElementById('parent');
+
+// socket.on('new_comment', (msg) => {
+//     const commentElement = createComment(msg);
+//     const commentHolders = commentHolder.children[0];
+//     commentHolder.insertBefore(commentElement, commentHolders);
+// });
+// socket.on('new_reply', (msgs) => {
+//     const replyElement = createReplyElement(msgs);
+//     parent.previousElementSibling.appendChild(replyElement);
+// });
 
 comment.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -16,6 +29,7 @@ comment.addEventListener('keypress', (e) => {
                     const commentElement = createComment(data);
                     const commentHolders = commentHolder.children[0];
                     commentHolder.insertBefore(commentElement, commentHolders);
+                    console.log(data);
                     e.target.value = '';
                 })
                 .catch((err) => {
@@ -76,25 +90,25 @@ function reqCommentReply(url, method, body) {
 
 function createComment(comment) {
     const innerHTML = `
-        <div class="flex-shrink-0">
-            <img src="${
-                comment.user.profilePics
-            }" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/>
-        </div>
-        <div class="flex-grow-0 col-md-9 my-3">
-            <h6>${comment.user.userName}</h6>
-            <div class="border rounded bg-light px-2 py-1">
-            <p class="card-text">${comment.body}</p>
+            <div class="flex-shrink-0">
+                <img src="${
+                    comment.user.profilePics
+}" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/>
             </div>
-            <small>${moment(comment.createdAt).fromNow()}</small>
-
-            <div class="my-3">
-                <input type="text" class="form-control" placeholder="Press Enter to Reply" name="reply" data-comment=${
-                    comment._id
-                }/>
+            <div class="flex-grow-0 col-md-9 my-3">
+                <h6>${comment.user.userName}</h6>
+                <div class="border rounded bg-light px-2 py-1">
+                <p class="card-text">${comment.body}</p>
+                </div>
+                <small>${moment(comment.createdAt).fromNow()}</small>
+    
+                <div class="my-3">
+                    <input type="text" class="form-control" placeholder="Press Enter to Reply" name="reply" data-comment=${
+                        comment._id
+}/>
+                </div>
             </div>
-        </div>
-  `;
+      `;
 
     const div = document.createElement('div');
     div.className = 'd-flex';
@@ -105,17 +119,17 @@ function createComment(comment) {
 
 function createReplyElement(reply) {
     const innerHTML = `
-        <img src="${
+            <img src="${
     reply.profilePics
 }" class="align-self-start me-3 rounded-circle" style="width: 40px"/>
-
-    <div class="flex-grow-0 col-md-10">
-        <h6>${reply.userName}</h6>
-        <div class="border rounded bg-light px-2 py-1">
-        <p class="card-text">${reply.body}</p>
-        </div>
-        <small>${moment(reply.createAt).fromNow()}</small>
-    </div>`;
+    
+        <div class="flex-grow-0 col-md-10">
+            <h6>${reply.userName}</h6>
+            <div class="border rounded bg-light px-2 py-1">
+            <p class="card-text">${reply.body}</p>
+            </div>
+            <small>${moment(reply.createAt).fromNow()}</small>
+        </div>`;
 
     const div = document.createElement('div');
     div.className = 'd-flex mt-3';

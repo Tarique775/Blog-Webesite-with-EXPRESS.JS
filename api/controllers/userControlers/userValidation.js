@@ -27,8 +27,10 @@ const userValidator = [
         .trim(),
 
     body('password')
-        .isLength({ min: 5 })
-        .withMessage('Password must be grater than 5 chars')
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/g)
+        .withMessage(
+            'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+        )
         .trim(),
 
     body('confirmPassword')
