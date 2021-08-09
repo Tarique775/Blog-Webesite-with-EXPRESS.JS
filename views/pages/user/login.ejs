@@ -17,8 +17,8 @@
     <div class="container my-container my-5">
       <div class="row">
         <div class="col-md-6 offset-md-3">
-          <div class="card card-body rounded-3 my-4">
-            <h1 class="text-center mb-3">Login</h1>
+          <div class="card card-body rounded-3 my-4 mx-5">
+            <h1 class="mx-5 mb-3">Login</h1>
 
             <% if(Email !=''){ %>
             <div
@@ -52,7 +52,7 @@
                 <strong><label class="mb-2" for="email">Email</label></strong>
                 <input
                   type="email"
-                  class="form-control <%= error.email ? 'is-invalid' : ''%>"
+                  class="form-control <%= error.email ? 'is-invalid' : ''%> rounded-pill"
                   name="email"
                   id="email"
                 />
@@ -67,7 +67,7 @@
                 >
                 <input
                   type="password"
-                  class="form-control <%= error.password ? 'is-invalid' : ''%>"
+                  class="form-control <%= error.password ? 'is-invalid' : ''%> rounded-pill"
                   name="password"
                   id="password"
                 />
@@ -76,7 +76,9 @@
                 </div>
               </div>
               <br />
-              <button type="submit" class="btn btn-primary mb-2">Login</button>
+              <button type="submit" class="btn btn-primary mb-2 rounded-pill">
+                Login
+              </button>
             </form>
           </div>
         </div>
