@@ -48,6 +48,7 @@ const uploadProfilePicsRoute = require('./api/routes/uploadProfilepicRoute/uploa
 const { auth } = require('./api/middleware/authentication');
 const locals = require('./api/middleware/locals');
 const blogRoute = require('./api/routes/BlogsRoute/BlogsRoute');
+const author = require('./api/routes/authorRoute');
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -64,6 +65,7 @@ app.use('/api', apiRoute);
 app.use('/api/user', userRoute);
 app.use('/api/dashbord', dashbordRoute, uploadProfilePicsRoute);
 app.use('/search', searchRoute);
+app.use('/author', author);
 app.use((req, res, next) => {
     res.render('pages/404NotFound');
     // res.status(404).json({ message: 'not found!' });

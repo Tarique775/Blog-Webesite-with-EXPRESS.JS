@@ -1,0 +1,17 @@
+:root {
+  --primary: #171c2a;
+  --secondary: #11141f;
+  --tertiary: #1f222e;
+  --dark: #0e0e12;
+  --green: #52d794;
+  --blue: #00b3bd;
+  --light: #fff;
+  --red: indianred;
+}
+
+body {
+  background: linear-gradient(to right, var(--green) 0%, var(--blue) 100%);
+}
+#hober:hover {
+  text-decoration: underline;
+}

@@ -20,9 +20,16 @@ likeBtn.addEventListener('click', (e) => {
     reqlikeDislike('likes', postId)
         .then((res) => res.json())
         .then((data) => {
-            let liketext = data.liked ? 'Liked' : 'Like';
-            liketext += ` ( ${data.totalLikes} )`;
-            const disliketext = `Dislike ( ${data.totalDislikes} )`;
+            let liketext = data.liked
+                ? `<strong
+                ><i style="color: blue" class="fas fa-thumbs-up"></i
+            ></strong>
+            <small style="color: blue">Liked</small>`
+                : '<strong> <i class="far fa-thumbs-up"></i> </strong><small>Like</small>';
+            liketext += data.totalLikes < 1 ? '' : ` <small>${data.totalLikes}</small>`;
+            const disliketext =                data.totalDislikes < 1
+                    ? '<strong> <i class="far fa-thumbs-down"></i> </strong><small>Dislike</small>'
+                    : `<strong> <i class="far fa-thumbs-down"></i> </strong><small>Dislike ${data.totalDislikes}</small>`;
 
             likeBtn.innerHTML = liketext;
             dislikeBtn.innerHTML = disliketext;
@@ -38,9 +45,17 @@ dislikeBtn.addEventListener('click', (e) => {
     reqlikeDislike('dislikes', postId)
         .then((res) => res.json())
         .then((data) => {
-            let disliketext = data.disliked ? 'Disliked' : 'Dislike';
-            disliketext += ` ( ${data.totalDislikes} )`;
-            const liketext = `Like ( ${data.totalLikes} )`;
+            let disliketext = data.disliked
+                ? `<strong
+                ><i style="color: blue" class="fas fa-thumbs-down"></i
+              ></strong>
+              <small style="color: blue">Disliked</small>`
+                : '<strong> <i class="far fa-thumbs-down"></i> </strong><small>Dislike</small>';
+            disliketext += data.totalDislikes < 1 ? '' : ` <small>${data.totalDislikes}</small>`;
+            const liketext =
+                data.totalLikes < 1
+                ? '<strong> <i class="far fa-thumbs-up"></i> </strong><small>Like</small>'
+                : `<strong> <i class="far fa-thumbs-up"></i> </strong><small>Like ${data.totalLikes}</small>`;
 
             dislikeBtn.innerHTML = disliketext;
             likeBtn.innerHTML = liketext;

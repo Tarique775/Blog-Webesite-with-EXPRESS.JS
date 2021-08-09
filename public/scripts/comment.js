@@ -1,4 +1,4 @@
-const socket = io(`${process.env.APP_URL}`);
+// const socket = io(`${process.env.APP_URL}`);
 
 const comment = document.getElementById('comment');
 const commentHolder = document.getElementById('comment-holder');
