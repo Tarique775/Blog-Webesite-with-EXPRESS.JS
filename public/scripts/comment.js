@@ -91,12 +91,18 @@ function reqCommentReply(url, method, body) {
 function createComment(comment) {
     const innerHTML = `
             <div class="flex-shrink-0">
-                <img src="${
-                    comment.user.profilePics
-}" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/>
+            <a
+            href="/author/${comment.user._id}"
+            style="text-decoration: none; color: currentColor"
+            ><img src="${
+    comment.user.profilePics
+            }" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/></a>
             </div>
             <div class="flex-grow-0 col-md-9 my-3">
-                <h6>${comment.user.userName}</h6>
+            <a
+            href="/author/${comment.user._id}"
+            style="text-decoration: none; color: currentColor"
+            ><h6>${comment.user.userName}</h6></a>
                 <div class="border rounded-3 bg-light px-2 py-1">
                 <p class="card-text">${comment.body}</p>
                 </div>
@@ -104,8 +110,8 @@ function createComment(comment) {
     
                 <div class="my-3">
                     <input type="text" class="form-control" placeholder="Press Enter to Reply" name="reply" data-comment=${
-                        comment._id
-}/>
+    comment._id
+                    }/>
                 </div>
             </div>
       `;
@@ -119,12 +125,18 @@ function createComment(comment) {
 
 function createReplyElement(reply) {
     const innerHTML = `
-            <img src="${
-    reply.profilePics
-}" class="align-self-start me-3 rounded-circle" style="width: 40px"/>
+    <div class="flex-shrink-0"><a
+    href="/author/${reply.id}"
+    style="text-decoration: none; color: currentColor"
+    ><img src="${
+        reply.profilePics
+    }" class="align-self-start me-3 rounded-circle" style="width: 40px"/></a></div>
     
         <div class="flex-grow-0 col-md-10">
-            <h6>${reply.userName}</h6>
+        <a
+        href="/author/${reply.id}"
+        style="text-decoration: none; color: currentColor"
+        ><h6>${reply.userName}</h6></a>
             <div class="border rounded-3 bg-light px-2 py-1">
             <p class="card-text">${reply.body}</p>
             </div>

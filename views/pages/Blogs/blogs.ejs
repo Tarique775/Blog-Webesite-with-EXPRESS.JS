@@ -54,6 +54,40 @@
             <p>There is no post</p>
             <% } else { %> <% for(let post of posts) { %>
             <div class="card card-body mb-3">
+              <div class="d-flex mb-2">
+                <div class="flex-shrink-0">
+                  <a
+                    href="/author/<%= post.author._id %>"
+                    style="text-decoration: none"
+                  >
+                    <img
+                      src="<%= post.author.profilePics %>"
+                      class="rounded-circle"
+                      style="width: 40px"
+                  /></a>
+                </div>
+                <div class="flex-grow-1 ms-2" id="parent">
+                  <a
+                    href="/author/<%= post.author._id %>"
+                    style="text-decoration: none; color: currentColor"
+                    ><h6><%= post.author.userName %></h6></a
+                  >
+                  <small>
+                    <%= moments(post.createdAt) %>, <%= post.readTime %>
+                  </small>
+                </div>
+
+                <%if(user) { %>
+                <span class="ms-auto mt-1 bookmark" data-post="<%= post._id %>">
+                  <% if(bookmarks.includes(post._id)){ %>
+                  <i class="fas fa-bookmark"></i>
+                  <% } else { %>
+                  <i class="far fa-bookmark"></i>
+                  <% } %>
+                </span>
+                <% } %>
+              </div>
+
               <% if (post.thumbnail) { %>
               <img class="img-fluid mb-2" src="<%= post.thumbnail %>" />
               <% } %>
@@ -64,25 +98,6 @@
                 <h5 id="hober"><%=post.title%></h5>
                 <p id="hober" class="mb-4"><%=truncate(post.body)%></p></a
               >
-              <div class="d-flex">
-                <small>
-                  <%= moments(post.createdAt) %>, Posted By
-                  <a
-                    href="/author/<%= post.author._id %>"
-                    style="text-decoration: none"
-                    ><%= post.author.userName %></a
-                  >, <%= post.readTime %>
-                </small>
-                <% if(user) { %>
-                <span class="ms-auto bookmark" data-post="<%= post._id %>">
-                  <% if(bookmarks.includes(post._id)){ %>
-                  <i class="fas fa-bookmark"></i>
-                  <% } else { %>
-                  <i class="far fa-bookmark"></i>
-                  <% } %>
-                </span>
-                <% } %>
-              </div>
             </div>
             <% } %> <% } %>
           </section>

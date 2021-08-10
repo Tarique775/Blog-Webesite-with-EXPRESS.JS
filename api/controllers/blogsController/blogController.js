@@ -13,32 +13,32 @@ function genFilter(filter) {
     let order = 1;
 
     switch (filter) {
-        case 'latest': {
-            order = 1;
-            break;
-        }
-        case 'week': {
-            filterObj = {
-                createdAt: {
-                    $gt: genDate(7),
-                },
-            };
-            order = -1;
-            break;
-        }
-        case 'month': {
-            filterObj = {
-                createdAt: {
-                    $gt: genDate(30),
-                },
-            };
-            order = -1;
-            break;
-        }
-        case 'all': {
-            order = -1;
-            break;
-        }
+    case 'latest': {
+        order = 1;
+        break;
+    }
+    case 'week': {
+        filterObj = {
+            createdAt: {
+                $gt: genDate(7),
+            },
+        };
+        order = -1;
+        break;
+    }
+    case 'month': {
+        filterObj = {
+            createdAt: {
+                $gt: genDate(30),
+            },
+        };
+        order = -1;
+        break;
+    }
+    case 'all': {
+        order = -1;
+        break;
+    }
     }
     return {
         filterObj,
@@ -55,7 +55,7 @@ controllers.getBlogController = async (req, res, next) => {
     const { filterObj, order } = genFilter(filter.toLowerCase());
     try {
         const posts = await Post.find(filterObj)
-            .populate('author', 'userName')
+            .populate('author', 'userName profilePics')
             .sort(order === 1 ? '-createdAt' : 'createdAt')
             .skip(itemPerPage * currentPage - itemPerPage)
 

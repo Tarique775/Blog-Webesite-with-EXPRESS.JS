@@ -50,64 +50,92 @@
               <section><%- post.body %></section>
               <section class="mt-4">
                 <% if (!user) { %>
-                <button class="btn btn-success btn-sm" disabled>
-                  Like ( <%= post.likes.length %> )
-                </button>
-                <button class="btn btn-danger btn-sm" disabled>
-                  Dislike ( <%= post.dislikes.length %> )
-                </button>
+                <div class="border-bottom border-top">
+                  <button
+                    class="btn"
+                    style="box-shadow: none; outline: none"
+                    disabled
+                  >
+                    <strong
+                      ><i style="color: blue" class="far fa-thumbs-up"></i
+                    ></strong>
+                    <small style="color: blue">Like</small>
+                    <small
+                      ><%= post.likes.length===0 ? '' : post.likes.length
+                      %></small
+                    >
+                  </button>
+                  <button
+                    class="btn"
+                    style="box-shadow: none; outline: none"
+                    disabled
+                  >
+                    <strong
+                      ><i style="color: blue" class="far fa-thumbs-down"></i
+                    ></strong>
+                    <small style="color: blue">Dislike</small>
+                    <small
+                      ><%= post.dislikes.length===0 ? '' : post.dislikes.length
+                      %></small
+                    >
+                  </button>
+                </div>
                 <p class="text-center text-muted my-3">
                   To Like And Comment Please <a href="/api/user/login">Login</a>
                 </p>
                 <% } else { %>
-                <button
-                  class="btn"
-                  style="box-shadow: none; outline: none"
-                  id="likeBtn"
-                  data-post="<%= post._id %>"
-                >
-                  <% if(post.likes.includes(user._id)) { %>
-                  <strong
-                    ><i style="color: blue" class="fas fa-thumbs-up"></i
-                  ></strong>
-                  <small style="color: blue">Liked</small>
-                  <% if(post.likes.length===0) {%>
-                  <small style="display: none"></small>
-                  <%}%> <%}else { %>
-                  <strong> <i class="far fa-thumbs-up"></i> </strong>
-                  <small>Like</small>
-                  <% if(post.likes.length===0) {%>
-                  <small style="display: none"></small>
-                  <%}%> <%}%>
-                  <small
-                    ><%= post.likes.length===0 ? '' : post.likes.length
-                    %></small
+
+                <div class="border-bottom border-top">
+                  <button
+                    class="btn"
+                    style="box-shadow: none; outline: none"
+                    id="likeBtn"
+                    data-post="<%= post._id %>"
                   >
-                </button>
-                <button
-                  class="btn"
-                  style="box-shadow: none; outline: none"
-                  id="dislikeBtn"
-                  data-post="<%= post._id %>"
-                >
-                  <% if(post.dislikes.includes(user._id)) { %>
-                  <strong
-                    ><i style="color: blue" class="fas fa-thumbs-down"></i
-                  ></strong>
-                  <small style="color: blue">Disliked</small>
-                  <% if(post.dislikes.length===0) {%>
-                  <small style="display: none"></small>
-                  <%}%> <%}else { %>
-                  <strong> <i class="far fa-thumbs-down"></i> </strong>
-                  <small>Dislike</small>
-                  <% if(post.dislikes.length===0) {%>
-                  <small style="display: none"></small>
-                  <%}%> <%}%>
-                  <small
-                    ><%= post.dislikes.length===0 ? '' : post.dislikes.length
-                    %></small
+                    <% if(post.likes.includes(user._id)) { %>
+                    <strong
+                      ><i style="color: blue" class="fas fa-thumbs-up"></i
+                    ></strong>
+                    <small style="color: blue">Liked</small>
+                    <% if(post.likes.length===0) {%>
+                    <small style="display: none"></small>
+                    <%}%> <%}else { %>
+                    <strong> <i class="far fa-thumbs-up"></i> </strong>
+                    <small>Like</small>
+                    <% if(post.likes.length===0) {%>
+                    <small style="display: none"></small>
+                    <%}%> <%}%>
+                    <small
+                      ><%= post.likes.length===0 ? '' : post.likes.length
+                      %></small
+                    >
+                  </button>
+                  <button
+                    class="btn"
+                    style="box-shadow: none; outline: none"
+                    id="dislikeBtn"
+                    data-post="<%= post._id %>"
                   >
-                </button>
+                    <% if(post.dislikes.includes(user._id)) { %>
+                    <strong
+                      ><i style="color: blue" class="fas fa-thumbs-down"></i
+                    ></strong>
+                    <small style="color: blue">Disliked</small>
+                    <% if(post.dislikes.length===0) {%>
+                    <small style="display: none"></small>
+                    <%}%> <%}else { %>
+                    <strong> <i class="far fa-thumbs-down"></i> </strong>
+                    <small>Dislike</small>
+                    <% if(post.dislikes.length===0) {%>
+                    <small style="display: none"></small>
+                    <%}%> <%}%>
+                    <small
+                      ><%= post.dislikes.length===0 ? '' : post.dislikes.length
+                      %></small
+                    >
+                  </button>
+                </div>
+
                 <div class="mt-4">
                   <label for="comment"><h6>Leave A Comment</h6></label>
                   <input
@@ -126,14 +154,21 @@
 
                   <div class="d-flex">
                     <div class="flex-shrink-0">
-                      <img
-                        src="<%= comment.user.profilePics %>"
-                        class="rounded-circle mx-3 my-3"
-                        style="width: 40px"
-                      />
+                      <a
+                        href="/author/<%= post.author._id %>"
+                        style="text-decoration: none; color: currentColor"
+                        ><img
+                          src="<%= comment.user.profilePics %>"
+                          class="rounded-circle mx-3 my-3"
+                          style="width: 40px"
+                      /></a>
                     </div>
                     <div class="flex-grow-0 col-md-9 my-3" id="parent">
-                      <h6><%= comment.user.userName %></h6>
+                      <a
+                        href="/author/<%= post.author._id %>"
+                        style="text-decoration: none; color: currentColor"
+                        ><h6><%= comment.user.userName %></h6></a
+                      >
                       <div class="border rounded-3 bg-light px-2 pt-1">
                         <p><%= comment.body %></p>
                       </div>
@@ -143,15 +178,22 @@
                         reply of comment.replies) { %>
                         <div class="d-flex mt-3">
                           <div class="flex-shrink-0">
-                            <img
-                              src="<%= reply.user.profilePics %>"
-                              class="align-self-start rounded-circle me-3"
-                              style="width: 40px"
-                            />
+                            <a
+                              href="/author/<%= post.author._id %>"
+                              style="text-decoration: none; color: currentColor"
+                              ><img
+                                src="<%= reply.user.profilePics %>"
+                                class="align-self-start rounded-circle me-3"
+                                style="width: 40px"
+                            /></a>
                           </div>
 
                           <div class="flex-grow-0 col-md-10">
-                            <h6><%= reply.user.userName %></h6>
+                            <a
+                              href="/author/<%= post.author._id %>"
+                              style="text-decoration: none; color: currentColor"
+                              ><h6><%= reply.user.userName %></h6></a
+                            >
                             <div class="border rounded-3 bg-light px-2 py-1">
                               <p><%= reply.body %></p>
                             </div>

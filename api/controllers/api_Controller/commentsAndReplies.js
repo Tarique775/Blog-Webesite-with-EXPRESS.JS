@@ -81,6 +81,7 @@ controllers.postRepliesController = async (req, res, next) => {
             ...reply,
             profilePics: req.user.profilePics,
             userName: req.user.userName,
+            id: req.user._id,
             createAt: comment_reply.replies.createAt,
         });
     } catch (e) {
