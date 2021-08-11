@@ -57,7 +57,7 @@ controllers.postCreatePosts = async (req, res, next) => {
         const createPost = await post.save();
         await Profile.findOneAndUpdate(
             { user: req.user._id },
-            { $push: { posts: createPost._id } }
+            { $push: { posts: createPost._id } },
         );
 
         // res.redirect(`/api/dashbord/edit-posts/${createPost._id}`);
@@ -82,7 +82,7 @@ controllers.getEditPosts = async (req, res, next) => {
         res.render('pages/dashbord/posts/edit-posts', {
             error: {},
             post,
-            page_name: 'edit-posts',
+            page_name: 'my-posts',
         });
     } catch (e) {
         next(e);
@@ -106,7 +106,7 @@ controllers.postEditPosts = async (req, res, next) => {
             return res.render('pages/dashbord/posts/edit-posts', {
                 error: errors.mapped(),
                 post,
-                page_name: 'edit-posts',
+                page_name: 'my-posts',
             });
         }
 
@@ -129,7 +129,7 @@ controllers.postEditPosts = async (req, res, next) => {
                     thumbnail,
                 },
             },
-            { new: true },
+            { new: true }
         );
         res.redirect(`/api/dashbord/edit-posts/${editPost._id}`);
     } catch (e) {

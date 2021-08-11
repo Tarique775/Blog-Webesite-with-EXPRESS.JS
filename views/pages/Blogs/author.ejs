@@ -84,7 +84,14 @@
             <div class="mt-3">
               <h4 class="mb-3"><strong class="">Posts</strong></h4>
               <% if(author.profile.posts.length === 0) { %>
-              <p>There is no post</p>
+              <div class="text-center text-muted mb-4">
+                <p>There is no posts availabe right now</p>
+                <a
+                  href="/api/dashbord/create-posts"
+                  class="btn btn-primary btn-sm"
+                  >Create Post Now</a
+                >
+              </div>
               <% } else { %> <% for(let post of author.profile.posts.reverse())
               { %>
               <div class="card card-body mb-3">

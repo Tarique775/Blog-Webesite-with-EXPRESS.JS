@@ -32,39 +32,41 @@
         <div class="col-md-2"><%-include('../../dashbord-nav.ejs') -%></div>
         <div class="col-md-10">
           <div class="col-md-8 offset-md-1">
-            <div class="card card-body my-5 bg-light" style="border: none">
-              <div class="border-top border-bottom py-1">
-                <h4>List Of My Posts</h4>
-              </div>
-              <div class="row">
-                <% if(posts.length===0) { %>
-                <div class="text-center text-muted">
-                  <p>There is no posts availabe right now</p>
-                  <a
-                    href="/api/dashbord/create-posts"
-                    class="btn btn-primary btn-sm"
-                    >Create Post Now</a
-                  >
+            <div class="row">
+              <div class="card card-body my-4 bg-light" style="border: none">
+                <div class="ms-4">
+                  <h4>List Of My Posts</h4>
                 </div>
-                <% } else { %> <% for (let post of posts.reverse()) { %>
-                <div class="card col-sm-3 my-4 ms-5">
-                  <% if (post.thumbnail) { %>
-                  <img
-                    src="<%= post.thumbnail %>"
-                    alt="<%= post.title %>"
-                    class="card-img-top mt-3"
-                  />
-                  <% } %>
-                  <div class="card-body p-0 mt-2">
+                <div class="row mx-auto">
+                  <% if(posts.length===0) { %>
+                  <div class="text-center text-muted mt-5">
+                    <p>There is no posts availabe right now</p>
+                    <a
+                      href="/api/dashbord/create-posts"
+                      class="btn btn-primary btn-sm"
+                      >Create Post Now</a
+                    >
+                  </div>
+                  <% } else { %> <% for (let post of posts.reverse()) { %>
+                  <div class="card col-sm-3 mx-4 my-4">
+                    <% if (post.thumbnail) { %>
+
+                    <img
+                      src="<%= post.thumbnail %>"
+                      alt="<%= post.title %>"
+                      class="card-img-top mt-3"
+                    />
+                    <% } %>
+
                     <a
                       href="/api/dashbord/edit-posts/<%= post._id %>"
                       style="color: #222; text-decoration: none"
                     >
-                      <h5 id="hober"><%= post.title %></h5></a
+                      <h5 class="mt-2 p-0" id="hober"><%= post.title %></h5></a
                     >
                   </div>
+                  <% } %> <% } %>
                 </div>
-                <% } %> <% } %>
               </div>
             </div>
           </div>
