@@ -11,12 +11,13 @@ controllers.getRegister = (req, res, next) => {
         error: {},
         value: {},
         success: '',
+        page_name: 'register',
     });
 };
 
 controllers.postRegister = async (req, res, next) => {
-    const { userName, email, password, confirmPassword 
-} = req.body;
+    const {
+ userName, email, password, confirmPassword, } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -29,6 +30,7 @@ controllers.postRegister = async (req, res, next) => {
                 confirmPassword,
             },
             success: '',
+            page_name: 'register',
         });
     }
 
@@ -55,6 +57,7 @@ controllers.getLogin = (req, res, next) => {
         value: {},
         Email: '',
         Password: '',
+        page_name: 'login',
     });
 };
 
@@ -65,6 +68,7 @@ controllers.postLogin = async (req, res, next) => {
             error: errors.mapped(),
             Email: '',
             Password: '',
+            page_name: 'login',
         });
     }
     try {
@@ -76,6 +80,7 @@ controllers.postLogin = async (req, res, next) => {
                 value: {},
                 Email: 'Invalid Credential',
                 Password: '',
+                page_name: 'login',
             });
         }
         const isMatch = await user.matchPassword(password);
@@ -86,6 +91,7 @@ controllers.postLogin = async (req, res, next) => {
                 value: {},
                 Email: '',
                 Password: 'Invalid Credentials',
+                page_name: 'login',
             });
         }
         const token = await user.getAuthToken();
@@ -115,7 +121,12 @@ controllers.postLogout = async (req, res, next) => {
 };
 
 controllers.getChangePassword = (req, res, next) => {
-    res.render('pages/user/changePassword', { error: {}, value: {}, success: '' });
+    res.render('pages/user/changePassword', {
+        error: {},
+        value: {},
+        success: '',
+        page_name: 'changePassword',
+    });
 };
 
 controllers.postChangePassword = async (req, res, next) => {
@@ -130,6 +141,7 @@ controllers.postChangePassword = async (req, res, next) => {
             confirmPassword,
             success: '',
             value: {},
+            page_name: 'changePassword',
         });
     }
 
@@ -140,7 +152,7 @@ controllers.postChangePassword = async (req, res, next) => {
 
         const chngPass = await User.findOneAndUpdate(
             { _id: req.user._id },
-            { $set: { password: hash } }
+            { $set: { password: hash } },
         );
         if (chngPass) {
             return res.redirect('/api/user/logout');

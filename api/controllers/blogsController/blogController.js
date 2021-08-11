@@ -13,32 +13,32 @@ function genFilter(filter) {
     let order = 1;
 
     switch (filter) {
-    case 'latest': {
-        order = 1;
-        break;
-    }
-    case 'week': {
-        filterObj = {
-            createdAt: {
-                $gt: genDate(7),
-            },
-        };
-        order = -1;
-        break;
-    }
-    case 'month': {
-        filterObj = {
-            createdAt: {
-                $gt: genDate(30),
-            },
-        };
-        order = -1;
-        break;
-    }
-    case 'all': {
-        order = -1;
-        break;
-    }
+        case 'latest': {
+            order = 1;
+            break;
+        }
+        case 'week': {
+            filterObj = {
+                createdAt: {
+                    $gt: genDate(7),
+                },
+            };
+            order = -1;
+            break;
+        }
+        case 'month': {
+            filterObj = {
+                createdAt: {
+                    $gt: genDate(30),
+                },
+            };
+            order = -1;
+            break;
+        }
+        case 'all': {
+            order = -1;
+            break;
+        }
     }
     return {
         filterObj,
@@ -81,6 +81,7 @@ controllers.getBlogController = async (req, res, next) => {
             currentPage,
             itemPerPage,
             bookmarks,
+            page_name: 'blogs',
         });
     } catch (e) {
         next(e);
@@ -126,6 +127,7 @@ controllers.singlePostGetController = async (req, res, next) => {
         res.render('pages/Blogs/singlePost', {
             post,
             bookmarks,
+            page_name: 'blogs',
         });
     } catch (e) {
         next(e);

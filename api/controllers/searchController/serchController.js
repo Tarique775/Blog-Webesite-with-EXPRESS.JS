@@ -29,6 +29,7 @@ controllers.getSearchController = async (req, res, next) => {
             currentPage,
             itemPerPage,
             term,
+            page_name: '',
         });
     } catch (e) {
         next(e);

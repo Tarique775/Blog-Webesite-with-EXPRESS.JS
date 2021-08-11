@@ -32,9 +32,11 @@
         <div class="col-md-2"><%-include('../../dashbord-nav.ejs') -%></div>
         <div class="col-md-10">
           <div class="col-md-8 offset-md-1">
-            <div class="card card-body my-5">
-              <h4>List Of My Posts</h4>
-              <div class="row justify-content-between mx-5">
+            <div class="card card-body my-5 bg-light" style="border: none">
+              <div class="border-top border-bottom py-1">
+                <h4>List Of My Posts</h4>
+              </div>
+              <div class="row">
                 <% if(posts.length===0) { %>
                 <div class="text-center text-muted">
                   <p>There is no posts availabe right now</p>
@@ -45,7 +47,7 @@
                   >
                 </div>
                 <% } else { %> <% for (let post of posts.reverse()) { %>
-                <div class="card col-sm-5 my-4">
+                <div class="card col-sm-3 my-4 ms-5">
                   <% if (post.thumbnail) { %>
                   <img
                     src="<%= post.thumbnail %>"
@@ -53,7 +55,7 @@
                     class="card-img-top mt-3"
                   />
                   <% } %>
-                  <div class="card-body">
+                  <div class="card-body p-0 mt-2">
                     <a
                       href="/api/dashbord/edit-posts/<%= post._id %>"
                       style="color: #222; text-decoration: none"

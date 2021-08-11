@@ -10,7 +10,9 @@ controllers.getDashbord = async (req, res, next) => {
         const profile = await Profile.findOne({ user: req.user._id });
         // console.log(profile);
         if (profile) {
-            return res.render('pages/dashbord/dashbord');
+            return res.render('pages/dashbord/dashbord', {
+                page_name: 'dashbord',
+            });
         }
         res.redirect('/api/dashbord/create-profile');
     } catch (e) {
@@ -25,7 +27,11 @@ controllers.getCreateProfile = async (req, res, next) => {
         if (profile) {
             return res.redirect('/api/dashbord/edit-profile');
         }
-        res.render('pages/dashbord/create-profile', { error: {}, value: {} });
+        res.render('pages/dashbord/create-profile', {
+            error: {},
+            value: {},
+            page_name: 'create-profile',
+        });
     } catch (e) {
         next(e);
     }
@@ -87,7 +93,11 @@ controllers.getEditProfile = async (req, res, next) => {
         if (!profile) {
             return res.redirect('/api/dashbord/create-profile');
         }
-        res.render('pages/dashbord/edit-profile', { error: {}, profile });
+        res.render('pages/dashbord/edit-profile', {
+            error: {},
+            profile,
+            page_name: 'edit-profile',
+        });
     } catch (e) {
         next(e);
     }
@@ -112,6 +122,7 @@ controllers.postEditProfile = async (req, res, next) => {
                     github,
                 },
             },
+            page_name: 'edit-profile',
         });
     }
 
@@ -134,7 +145,11 @@ controllers.postEditProfile = async (req, res, next) => {
             { new: true },
         );
 
-        res.render('pages/dashbord/edit-profile', { error: {}, profile: updateProfile });
+        res.render('pages/dashbord/edit-profile', {
+            error: {},
+            profile: updateProfile,
+            page_name: 'edit-profile',
+        });
     } catch (e) {
         next(e);
     }

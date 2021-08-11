@@ -13,6 +13,7 @@ controllers.getAuthorController = async (req, res, next) => {
         });
         res.render('pages/Blogs/author', {
             author,
+            page_name: '',
         });
     } catch (e) {
         next(e);
