@@ -15,10 +15,13 @@ const {
 } = require('../../controllers/dashboardControlers/posts');
 
 const postUpload = require('../../middleware/postMulterUpload');
+const { getBookmarks } = require('../../controllers/dashboardControlers/dashbord');
 
 const router = express.Router();
 
 router.get('/', isAuth, dashbordController.getDashbord);
+
+router.get('/bookmarks', isAuth, getBookmarks);
 
 router.get('/create-profile', isAuth, dashbordController.getCreateProfile);
 
@@ -39,7 +42,7 @@ router.post(
     isAuth,
     postUpload.single('photo'),
     postValidator,
-    postEditPosts
+    postEditPosts,
 );
 
 router.get('/delete-posts/:postId', isAuth, getDeletePosts);

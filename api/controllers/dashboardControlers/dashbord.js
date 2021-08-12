@@ -155,4 +155,20 @@ controllers.postEditProfile = async (req, res, next) => {
     }
 };
 
+controllers.getBookmarks = async (req, res, next) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user._id }).populate({
+            path: 'bookmarks',
+            model: 'Post',
+            select: 'title thumbnail',
+        });
+        res.render('pages/dashbord/bookmarks', {
+            posts: profile.bookmarks,
+            page_name: 'bookmarks',
+        });
+    } catch (e) {
+        next(e);
+    }
+};
+
 module.exports = controllers;
