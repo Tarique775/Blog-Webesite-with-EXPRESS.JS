@@ -31,7 +31,7 @@
                   <a
                     href="/author/<%= post.author._id %>"
                     style="text-decoration: none"
-                    ><%= post.author.userName %></a
+                    ><strong><%= post.author.userName %></strong></a
                   >, <%= post.readTime %>
                 </small>
                 <% if (user) { %>
@@ -48,7 +48,7 @@
               <img src="<%= post.thumbnail %>" class="img-fluid my-2" />
               <% } %>
               <section><%- post.body %></section>
-              <section class="mt-4">
+              <section class="">
                 <% if (!user) { %>
                 <div class="border-bottom border-top">
                   <button
@@ -164,12 +164,12 @@
                       /></a>
                     </div>
                     <div class="flex-grow-0 col-md-9 my-3" id="parent">
-                      <a
-                        href="/author/<%= post.author._id %>"
-                        style="text-decoration: none; color: currentColor"
-                        ><h6><%= comment.user.userName %></h6></a
-                      >
-                      <div class="border rounded-3 bg-light px-2 pt-1">
+                      <div class="bg-light border rounded-3 py-1 px-2">
+                        <a
+                          href="/author/<%= post.author._id %>"
+                          style="text-decoration: none; color: currentColor"
+                          ><h6><%= comment.user.userName %></h6></a
+                        >
                         <p><%= comment.body %></p>
                       </div>
                       <small> <%= moments(comment.createdAt) %> </small>
@@ -189,12 +189,15 @@
                           </div>
 
                           <div class="flex-grow-0 col-md-10">
-                            <a
-                              href="/author/<%= post.author._id %>"
-                              style="text-decoration: none; color: currentColor"
-                              ><h6><%= reply.user.userName %></h6></a
-                            >
-                            <div class="border rounded-3 bg-light px-2 py-1">
+                            <div class="bg-light border rounded-3 py-1 px-2">
+                              <a
+                                href="/author/<%= post.author._id %>"
+                                style="
+                                  text-decoration: none;
+                                  color: currentColor;
+                                "
+                                ><h6><%= reply.user.userName %></h6></a
+                              >
                               <p><%= reply.body %></p>
                             </div>
                             <small><%= moments(reply.createAt) %></small>

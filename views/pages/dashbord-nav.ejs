@@ -7,7 +7,9 @@
             class="<%= page_name === 'dashbord' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
             href="/api/dashbord/"
-            >DashBord</a
+            ><% if(page_name === 'dashbord') {%>
+            <strong>Dashbord</strong>
+            <% }else { %> Dashbord <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">
@@ -15,7 +17,9 @@
             class="<%= page_name === 'create-posts' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
             href="/api/dashbord/create-posts"
-            >New Post</a
+            ><% if(page_name === 'create-posts') {%>
+            <strong>New Post</strong>
+            <% }else { %> New Post <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">
@@ -23,7 +27,9 @@
             class="<%= page_name === 'my-posts' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
             href="/api/dashbord/posts"
-            >My Posts</a
+            ><% if(page_name === 'my-posts') {%>
+            <strong>My Posts</strong>
+            <% }else { %> My Posts <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">
@@ -31,7 +37,9 @@
             class="<%= page_name === 'bookmarks' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
             href="/api/dashbord/bookmarks"
-            >Bookmarks</a
+            ><% if(page_name === 'bookmarks') {%>
+            <strong>Bookmarks</strong>
+            <% }else { %> Bookmarks <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">
@@ -39,7 +47,9 @@
             class="<%= page_name === 'comments' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
             href="/api/dashbord/comments"
-            >Comments</a
+            ><% if(page_name === 'comments') {%>
+            <strong>Comments</strong>
+            <% }else { %> Comments <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">
@@ -47,7 +57,9 @@
             class="<%= page_name === 'edit-profile' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
             href="/api/dashbord/edit-profile"
-            >Edit Profile</a
+            ><% if(page_name === 'edit-profile') {%>
+            <strong>Edit Profile</strong>
+            <% }else { %> Edit Profile <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">
@@ -55,7 +67,9 @@
             class="<%= page_name === 'changePassword' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
             href="/api/user/change-password"
-            >Change Password</a
+            ><% if(page_name === 'changePassword') {%>
+            <strong>Change Password</strong>
+            <% }else { %> Change Password <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">

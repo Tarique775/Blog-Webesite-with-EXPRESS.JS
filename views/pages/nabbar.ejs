@@ -20,7 +20,9 @@
           <a
             class="<%= page_name === 'blogs' ? 'nav-link active' : 'nav-link' %>"
             href="/blogs"
-            ><strong>Blogs</strong></a
+            ><% if(page_name === 'blogs') {%>
+            <strong>Blogs</strong>
+            <% }else { %> Blogs <%}%></a
           >
         </li>
         <% if(token && user.profile){ %>
@@ -33,18 +35,25 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            ><strong>Dashbord Menu</strong></a
+            ><% if(page_name === 'dashbord' || page_name === 'create-posts' ||
+            page_name === 'my-posts' || page_name === 'bookmarks' || page_name
+            === 'comments' || page_name === 'edit-profile' || page_name ===
+            'changePassword') {%>
+            <strong>Dashbord Menu</strong>
+            <% }else { %> Dashbord Menu <%}%></a
           >
 
           <ul
-            class="dropdown-menu dropdown-menu-dark"
+            class="dropdown-menu dropdown-menu-dark text-center"
             aria-labelledby="navbarDropdownMenuLink"
           >
             <li>
               <a
                 class="<%= page_name === 'dashbord' ? 'dropdown-item active' : 'dropdown-item' %>"
                 href="/api/dashbord"
-                >DashBord</a
+                ><% if(page_name === 'dashbord') {%>
+                <strong>Dashbord</strong>
+                <% }else { %> Dashbord <%}%></a
               >
             </li>
 
@@ -53,7 +62,9 @@
               <a
                 class="<%= page_name === 'create-posts' ? 'dropdown-item active' : 'dropdown-item' %>"
                 href="/api/dashbord/create-posts"
-                >New Post</a
+                ><% if(page_name === 'create-posts') {%>
+                <strong>New Post</strong>
+                <% }else { %> New Post <%}%></a
               >
             </li>
 
@@ -62,7 +73,9 @@
               <a
                 class="<%= page_name === 'my-posts' ? 'dropdown-item active' : 'dropdown-item' %>"
                 href="/api/dashbord/posts"
-                >My Posts</a
+                ><% if(page_name === 'my-posts') {%>
+                <strong>My Posts</strong>
+                <% }else { %> My Posts <%}%></a
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
@@ -70,7 +83,9 @@
               <a
                 class="<%= page_name === 'bookmarks' ? 'dropdown-item active' : 'dropdown-item' %>"
                 href="/api/dashbord/bookmarks"
-                >Bookmarks</a
+                ><% if(page_name === 'bookmarks') {%>
+                <strong>Bookmarks</strong>
+                <% }else { %> Bookmarks <%}%></a
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
@@ -78,7 +93,9 @@
               <a
                 class="<%= page_name === 'comments' ? 'dropdown-item active' : 'dropdown-item' %>"
                 href="/api/dashbord/comments"
-                >Comments</a
+                ><% if(page_name === 'comments') {%>
+                <strong>Comments</strong>
+                <% }else { %> Comments <%}%></a
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
@@ -86,7 +103,9 @@
               <a
                 class="<%= page_name === 'edit-profile' ? 'dropdown-item active' : 'dropdown-item' %>"
                 href="/api/dashbord/edit-profile"
-                >Edit Profile</a
+                ><% if(page_name === 'edit-profile') {%>
+                <strong>Edit Profile</strong>
+                <% }else { %> Edit Profile <%}%></a
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
@@ -94,7 +113,9 @@
               <a
                 class="<%= page_name === 'changePassword' ? 'dropdown-item active' : 'dropdown-item' %>"
                 href="/api/user/change-password"
-                >Change Password</a
+                ><% if(page_name === 'changePassword') {%>
+                <strong>Change Password</strong>
+                <% }else { %> Change Password <%}%></a
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
@@ -105,9 +126,7 @@
         </li>
         <% } %> <% if(token){ %>
         <li class="nav-item">
-          <a class="nav-link" href="/api/user/logout"
-            ><strong>Logout</strong></a
-          >
+          <a class="nav-link" href="/api/user/logout">Logout</a>
         </li>
         <% } else { %>
         <li class="nav-item">
@@ -115,21 +134,27 @@
             class="<%= page_name === 'dashbord' ? 'nav-link active' : 'nav-link' %>"
             aria-current="page"
             href="/api/dashbord"
-            ><strong>DashBord</strong></a
+            ><% if(page_name === 'dashbord') {%>
+            <strong>Dashbord</strong>
+            <% }else { %> Dashbord <%}%></a
           >
         </li>
         <li class="nav-item">
           <a
             class="<%= page_name === 'register' ? 'nav-link active' : 'nav-link' %>"
             href="/api/user/register"
-            ><strong>Registation</strong></a
+            ><% if(page_name === 'register') {%>
+            <strong>Registation</strong>
+            <% }else { %> Registation <%}%></a
           >
         </li>
         <li class="nav-item">
           <a
             class="<%= page_name === 'login' ? 'nav-link active' : 'nav-link' %>"
             href="/api/user/login"
-            ><strong>Login</strong></a
+            ><% if(page_name === 'login') {%>
+            <strong>Login</strong>
+            <% }else { %> Login <%}%></a
           >
         </li>
 
