@@ -164,13 +164,13 @@
                       /></a>
                     </div>
                     <div class="flex-grow-0 col-md-9 my-3" id="parent">
-                      <div class="bg-light border rounded-3 py-1 px-2">
+                      <div class="bg-light border border-1 rounded-3 p-2">
                         <a
                           href="/author/<%= post.author._id %>"
                           style="text-decoration: none; color: currentColor"
                           ><h6><%= comment.user.userName %></h6></a
                         >
-                        <p><%= comment.body %></p>
+                        <span><%= comment.body %></span>
                       </div>
                       <small> <%= moments(comment.createdAt) %> </small>
                       <div name="replies">
@@ -189,7 +189,7 @@
                           </div>
 
                           <div class="flex-grow-0 col-md-10">
-                            <div class="bg-light border rounded-3 py-1 px-2">
+                            <div class="bg-light border border-1 rounded-3 p-2">
                               <a
                                 href="/author/<%= post.author._id %>"
                                 style="
@@ -198,7 +198,7 @@
                                 "
                                 ><h6><%= reply.user.userName %></h6></a
                               >
-                              <p><%= reply.body %></p>
+                              <span><%= reply.body %></span>
                             </div>
                             <small><%= moments(reply.createAt) %></small>
                           </div>

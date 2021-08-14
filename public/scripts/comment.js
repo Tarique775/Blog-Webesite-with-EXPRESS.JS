@@ -99,12 +99,12 @@ function createComment(comment) {
             }" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/></a>
             </div>
             <div class="flex-grow-0 col-md-9 my-3">
-            <div class="bg-light border rounded-3 py-1 px-2">
+            <div class="bg-light border border-1 rounded-3 p-2">
             <a
             href="/author/${comment.user._id}"
             style="text-decoration: none; color: currentColor"
             ><h6>${comment.user.userName}</h6></a>
-                <p class="card-text">${comment.body}</p>
+                <span>${comment.body}</span>
                 </div>
                 <small>${moment(comment.createdAt).fromNow()}</small>
     
@@ -131,14 +131,13 @@ function createReplyElement(reply) {
     ><img src="${
         reply.profilePics
     }" class="align-self-start me-3 rounded-circle" style="width: 40px"/></a></div>
-    
         <div class="flex-grow-0 col-md-10">
-        <div class="bg-light border rounded-3 py-1 px-2">
+        <div class="bg-light border border-1 rounded-3 p-2">
         <a
         href="/author/${reply.id}"
         style="text-decoration: none; color: currentColor"
         ><h6>${reply.userName}</h6></a>
-            <p class="card-text">${reply.body}</p>
+            <span>${reply.body}</span>
             </div>
             <small>${moment(reply.createAt).fromNow()}</small>
         </div>`;

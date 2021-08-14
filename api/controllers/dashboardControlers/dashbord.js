@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const Profile = require('../../models/profile');
 const User = require('../../models/user');
+const Comment = require('../../models/comment');
 const { errorFormetter } = require('./profileValidation');
 
 const controllers = {};
@@ -38,8 +39,8 @@ controllers.getCreateProfile = async (req, res, next) => {
 };
 
 controllers.postCreateProfile = async (req, res, next) => {
-    const { name, title, bio, website, facebook, twitter, github 
-} = req.body;
+    const {
+ name, title, bio, website, facebook, twitter, github, } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -78,7 +79,7 @@ controllers.postCreateProfile = async (req, res, next) => {
         await User.findOneAndUpdate(
             { _id: req.user._id },
             { $set: { profile: createProfile._id } },
-            { new: true },
+            { new: true }
         );
         res.redirect('/api/dashbord/');
     } catch (e) {
@@ -104,8 +105,8 @@ controllers.getEditProfile = async (req, res, next) => {
 };
 
 controllers.postEditProfile = async (req, res, next) => {
-    const { name, title, bio, website, facebook, twitter, github 
-} = req.body;
+    const {
+ name, title, bio, website, facebook, twitter, github, } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -142,7 +143,7 @@ controllers.postEditProfile = async (req, res, next) => {
         const updateProfile = await Profile.findOneAndUpdate(
             { user: req.user._id },
             { $set: profile },
-            { new: true },
+            { new: true }
         );
 
         res.render('pages/dashbord/edit-profile', {
@@ -165,6 +166,31 @@ controllers.getBookmarks = async (req, res, next) => {
         res.render('pages/dashbord/bookmarks', {
             posts: profile.bookmarks,
             page_name: 'bookmarks',
+        });
+    } catch (e) {
+        next(e);
+    }
+};
+
+controllers.getComments = async (req, res, next) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user._id });
+        const comments = await Comment.find({ post: { $in: profile.posts } })
+            .populate({
+                path: 'post',
+                select: 'title',
+            })
+            .populate({
+                path: 'user',
+                select: 'userName profilePics',
+            })
+            .populate({
+                path: 'replies.user',
+                select: 'userName profilePics',
+            });
+        res.render('pages/dashbord/comments', {
+            comments,
+            page_name: 'comments',
         });
     } catch (e) {
         next(e);

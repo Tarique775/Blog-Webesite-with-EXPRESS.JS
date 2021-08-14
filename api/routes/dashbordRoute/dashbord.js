@@ -15,13 +15,14 @@ const {
 } = require('../../controllers/dashboardControlers/posts');
 
 const postUpload = require('../../middleware/postMulterUpload');
-const { getBookmarks } = require('../../controllers/dashboardControlers/dashbord');
 
 const router = express.Router();
 
 router.get('/', isAuth, dashbordController.getDashbord);
 
-router.get('/bookmarks', isAuth, getBookmarks);
+router.get('/comments', isAuth, dashbordController.getComments);
+
+router.get('/bookmarks', isAuth, dashbordController.getBookmarks);
 
 router.get('/create-profile', isAuth, dashbordController.getCreateProfile);
 
