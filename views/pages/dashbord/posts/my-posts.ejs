@@ -48,7 +48,7 @@
                     >
                   </div>
                   <% } else { %> <% for (let post of posts.reverse()) { %>
-                  <div class="card col-sm-3 mx-4 my-4">
+                  <span class="card col-sm-3 m-4">
                     <% if (post.thumbnail) { %>
 
                     <img
@@ -64,7 +64,7 @@
                     >
                       <h5 class="mt-2 p-0" id="hober"><%= post.title %></h5></a
                     >
-                  </div>
+                  </span>
                   <% } %> <% } %>
                 </div>
               </div>
