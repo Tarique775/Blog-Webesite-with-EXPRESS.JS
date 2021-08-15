@@ -23,9 +23,64 @@
       <div class="row">
         <div class="col-md-2"><%-include('../dashbord-nav.ejs') -%></div>
         <div class="col-md-10">
-          <div class="col-md-8 offset-md-1">
-            <div class="card card-body my-5">
-              <h4>My DashBord</h4>
+          <div class="row">
+            <div class="col-md-9 offset-md-1 my-5">
+              <div class="row">
+                <h5>My Recently Created Posts</h5>
+                <% if(posts.length===0) { %>
+                <div class="text-center text-muted mt-5">
+                  <p>There is no posts availabe right now</p>
+                </div>
+                <% } else { %> <% for (let post of posts.reverse().slice(0,3)) {
+                %>
+                <span class="card col-sm-3 m-2">
+                  <% if (post.thumbnail) { %>
+
+                  <img
+                    src="<%= post.thumbnail %>"
+                    alt="<%= post.title %>"
+                    class="card-img-top mt-3"
+                  />
+                  <% } %>
+
+                  <a
+                    href="/blogs/<%= post._id %>"
+                    style="color: #222; text-decoration: none"
+                  >
+                    <h5 class="mt-2 p-0" id="hober"><%= post.title %></h5></a
+                  >
+                </span>
+                <% } %> <% } %>
+              </div>
+              <div class="row mt-5">
+                <h5>My Recently Added Bookmarks</h5>
+                <% if(posts.length===0) { %>
+                <div class="text-center text-muted mt-5">
+                  <p>There is no bookmarks</p>
+                </div>
+                <% } else { %> <% for (let bookmark of
+                bookmarks.reverse().slice(0,3)) { %>
+                <div class="card col-sm-3 m-2">
+                  <% if (bookmark.thumbnail) { %>
+
+                  <img
+                    src="<%= bookmark.thumbnail %>"
+                    alt="<%= bookmark.title %>"
+                    class="card-img-top mt-3"
+                  />
+                  <% } %>
+
+                  <a
+                    href="/blogs/<%= bookmark._id %>"
+                    style="color: #222; text-decoration: none"
+                  >
+                    <h5 class="mt-2 p-0" id="hober">
+                      <%= bookmark.title %>
+                    </h5></a
+                  >
+                </div>
+                <% } %> <% } %>
+              </div>
             </div>
           </div>
         </div>

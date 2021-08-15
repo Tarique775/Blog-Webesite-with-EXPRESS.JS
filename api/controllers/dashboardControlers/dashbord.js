@@ -8,11 +8,21 @@ const controllers = {};
 
 controllers.getDashbord = async (req, res, next) => {
     try {
-        const profile = await Profile.findOne({ user: req.user._id });
-        // console.log(profile);
+        const profile = await Profile.findOne({ user: req.user._id })
+            .populate({
+                path: 'posts',
+                select: 'title thumbnail',
+            })
+            .populate({
+                path: 'bookmarks',
+                select: 'title thumbnail',
+            });
+
         if (profile) {
             return res.render('pages/dashbord/dashbord', {
                 page_name: 'dashbord',
+                posts: profile.posts,
+                bookmarks: profile.bookmarks,
             });
         }
         res.redirect('/api/dashbord/create-profile');
