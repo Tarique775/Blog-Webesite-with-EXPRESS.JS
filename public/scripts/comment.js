@@ -2,12 +2,13 @@ const socket = io("http://localhost:5000");
 
 const comment = document.getElementById("comment");
 const commentHolder = document.getElementById("comment-holder");
+const ptag=document.getElementsByClassName('ptag')
 // const replyComment = document.getElementById('replyComment');
 
 socket.on("new_comment", (msg) => {
   const commentElement = createComment(msg);
   const commentHolders = commentHolder.children[0];
-  commentHolder.insertBefore(commentElement, commentHolders);
+  commentHolder.insertBefore(commentElement, commentHolders);  
 });
 // socket.on('new_reply', (replys) => {
 //     const replyElement = createReplyElement(replys);
