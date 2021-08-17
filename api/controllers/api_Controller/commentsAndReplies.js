@@ -32,11 +32,7 @@ controllers.postCommentController = async (req, res, next) => {
             select: 'profilePics userName',
         });
 
-        // global.io.emit('new_comment', {
-        //     body,
-        //     profilePics: req.user.profilePics,
-        //     userName: req.user.userName,
-        // });
+        global.io.emit('new_comment', commentJSON);
 
         return res.status(201).json(commentJSON);
     } catch (e) {
@@ -65,25 +61,14 @@ controllers.postRepliesController = async (req, res, next) => {
     };
 
     try {
-        const comment_reply = await Comment.findOneAndUpdate(
-            { _id: commentId },
-            { $push: { replies: reply } },
-        );
-
-        // global.io.emit('new_reply', {
-        //     body,
-        //     profilePics: req.user.profilePics,
-        //     userName: req.user.userName,
-        //     createAt: comment_reply.replies.createAt,
-        // });
-
-        res.status(201).json({
-            ...reply,
-            profilePics: req.user.profilePics,
-            userName: req.user.userName,
-            id: req.user._id,
-            createAt: comment_reply.replies.createAt,
-        });
+        await Comment.findOneAndUpdate({ _id: commentId }, { $push: { replies: reply } });
+        const replies = await Comment.findById(commentId).populate('user', 'userName profilePics');
+        global.io.emit('new_reply', replies);
+        // console.log(replies);
+        res.status(201).json(replies);
+        // profilePics: req.user.profilePics,
+        // userName: req.user.userName,
+        // id: req.user._id,
     } catch (e) {
         console.log(e);
         return res.status(500).json({
