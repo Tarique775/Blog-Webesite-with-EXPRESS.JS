@@ -39,7 +39,7 @@
           <% } %>
           <div class="card card-body my-4 mx-5">
             <h1 class="text-center mb-3">Registation</h1>
-            <form class="mx-5" action="/api/user/register" method="POST">
+            <form class="mx-5" action="/user/register" method="POST">
               <div class="form-group">
                 <strong
                   ><label class="mb-2" for="username">UserName</label></strong
@@ -114,10 +114,18 @@
                 </div>
               </div>
               <br />
-              <button type="submit" class="btn btn-primary mb-2 rounded-pill">
+              <button
+                type="submit"
+                class="btn btn-primary mb-3 rounded-pill py-2"
+                style="width: 100%"
+              >
                 Confirm Registation
               </button>
             </form>
+            <p class="text-center">
+              Already have an account?
+              <a href="/user/login" style="text-decoration: none">Login</a>
+            </p>
           </div>
         </div>
       </div>

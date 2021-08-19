@@ -12,7 +12,7 @@ window.onload = function () {
             'bold italic underline | alignleft aligncenter alignright alingjustify | bullist numlist outdent indent | link image media | forecolor backcolor emoticons | code preview',
         height: 300,
         automatic_uploads: true,
-        images_upload_url: '/api/dashbord/uploads/postimage',
+        images_upload_url: '/dashbord/uploads/postimage',
         relative_urls: false,
         images_upload_handler(blobInfo, success, failure) {
             const header = new Headers();
@@ -21,7 +21,7 @@ window.onload = function () {
             const formData = new FormData();
             formData.append('post-image', blobInfo.blob(), blobInfo.filename());
 
-            const req = new Request('/api/dashbord/uploads/postimage', {
+            const req = new Request('/dashbord/uploads/postimage', {
                 method: 'POST',
                 headers: header,
                 mode: 'cors',

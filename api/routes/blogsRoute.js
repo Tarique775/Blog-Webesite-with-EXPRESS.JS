@@ -3,7 +3,7 @@ const express = require('express');
 const {
     getBlogController,
     singlePostGetController,
-} = require('../../controllers/blogsController/blogController');
+} = require('../controllers/blogsController/blogController');
 
 const router = express.Router();
 

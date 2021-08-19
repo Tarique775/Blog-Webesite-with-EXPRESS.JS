@@ -50,7 +50,7 @@
             <li>
               <a
                 class="<%= page_name === 'dashbord' ? 'dropdown-item active' : 'dropdown-item' %>"
-                href="/api/dashbord"
+                href="/dashbord"
                 ><% if(page_name === 'dashbord') {%>
                 <strong>Dashbord</strong>
                 <% }else { %> Dashbord <%}%></a
@@ -61,7 +61,7 @@
             <li>
               <a
                 class="<%= page_name === 'create-posts' ? 'dropdown-item active' : 'dropdown-item' %>"
-                href="/api/dashbord/create-posts"
+                href="/dashbord/create-posts"
                 ><% if(page_name === 'create-posts') {%>
                 <strong>New Post</strong>
                 <% }else { %> New Post <%}%></a
@@ -72,7 +72,7 @@
             <li>
               <a
                 class="<%= page_name === 'my-posts' ? 'dropdown-item active' : 'dropdown-item' %>"
-                href="/api/dashbord/posts"
+                href="/dashbord/posts"
                 ><% if(page_name === 'my-posts') {%>
                 <strong>My Posts</strong>
                 <% }else { %> My Posts <%}%></a
@@ -82,7 +82,7 @@
             <li>
               <a
                 class="<%= page_name === 'bookmarks' ? 'dropdown-item active' : 'dropdown-item' %>"
-                href="/api/dashbord/bookmarks"
+                href="/dashbord/bookmarks"
                 ><% if(page_name === 'bookmarks') {%>
                 <strong>Bookmarks</strong>
                 <% }else { %> Bookmarks <%}%></a
@@ -92,7 +92,7 @@
             <li>
               <a
                 class="<%= page_name === 'comments' ? 'dropdown-item active' : 'dropdown-item' %>"
-                href="/api/dashbord/comments"
+                href="/dashbord/comments"
                 ><% if(page_name === 'comments') {%>
                 <strong>Comments</strong>
                 <% }else { %> Comments <%}%></a
@@ -102,7 +102,7 @@
             <li>
               <a
                 class="<%= page_name === 'edit-profile' ? 'dropdown-item active' : 'dropdown-item' %>"
-                href="/api/dashbord/edit-profile"
+                href="/dashbord/edit-profile"
                 ><% if(page_name === 'edit-profile') {%>
                 <strong>Edit Profile</strong>
                 <% }else { %> Edit Profile <%}%></a
@@ -112,28 +112,24 @@
             <li>
               <a
                 class="<%= page_name === 'changePassword' ? 'dropdown-item active' : 'dropdown-item' %>"
-                href="/api/user/change-password"
+                href="/user/change-password"
                 ><% if(page_name === 'changePassword') {%>
                 <strong>Change Password</strong>
                 <% }else { %> Change Password <%}%></a
               >
             </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" href="/api/user/logout">Logout</a>
-            </li>
           </ul>
         </li>
         <% } %> <% if(token){ %>
         <li class="nav-item">
-          <a class="nav-link" href="/api/user/logout">Logout</a>
+          <a class="nav-link" href="/user/logout">Logout</a>
         </li>
         <% } else { %>
         <li class="nav-item">
           <a
             class="<%= page_name === 'dashbord' ? 'nav-link active' : 'nav-link' %>"
             aria-current="page"
-            href="/api/dashbord"
+            href="/user/login"
             ><% if(page_name === 'dashbord') {%>
             <strong>Dashbord</strong>
             <% }else { %> Dashbord <%}%></a
@@ -142,7 +138,7 @@
         <li class="nav-item">
           <a
             class="<%= page_name === 'register' ? 'nav-link active' : 'nav-link' %>"
-            href="/api/user/register"
+            href="/user/register"
             ><% if(page_name === 'register') {%>
             <strong>Registation</strong>
             <% }else { %> Registation <%}%></a
@@ -151,7 +147,7 @@
         <li class="nav-item">
           <a
             class="<%= page_name === 'login' ? 'nav-link active' : 'nav-link' %>"
-            href="/api/user/login"
+            href="/user/login"
             ><% if(page_name === 'login') {%>
             <strong>Login</strong>
             <% }else { %> Login <%}%></a

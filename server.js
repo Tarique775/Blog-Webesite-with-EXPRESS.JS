@@ -11,8 +11,27 @@ const mongoose = require('mongoose');
 
 const http = require('http');
 
-// const config = require('config');
+const chalk = require('chalk');
 
+const app = express();
+
+const server = http.createServer(app);
+
+const io = require('socket.io')(server);
+
+global.io = io;
+
+const userRoute = require('./api/routes/userRoute');
+const dashbordRoute = require('./api/routes/dashbordRoute');
+const apiRoute = require('./api/routes/apiRoute');
+const searchRoute = require('./api/routes/searchRoute');
+const uploadProfilePicsRoute = require('./api/routes/uploadProfilepicsRoute');
+const blogRoute = require('./api/routes/blogsRoute');
+const author = require('./api/routes/authorRoute');
+const { auth } = require('./api/middleware/authentication');
+const locals = require('./api/middleware/locals');
+
+// const setRoutes = require('./api/routes/commonRoute/commonRoute');
 const mongoDBConnect = async () => {
     try {
         const mongooseConnect = await mongoose.connect(process.env.MONGODB, {
@@ -22,33 +41,13 @@ const mongoDBConnect = async () => {
             useCreateIndex: true,
         });
         if (mongooseConnect) {
-            return console.log('database conected successfully!');
+            return console.log(chalk.green.inverse('Database Conected Successfully!'));
         }
     } catch (err) {
         throw new Error(err);
     }
 };
 mongoDBConnect();
-
-// const multer = require('multer');
-const app = express();
-
-const server = http.createServer(app);
-
-const io = require('socket.io')(server);
-
-global.io = io;
-
-const userRoute = require('./api/routes/userRoute/user');
-const dashbordRoute = require('./api/routes/dashbordRoute/dashbord');
-const apiRoute = require('./api/routes/api_Route/apiRoute');
-const searchRoute = require('./api/routes/searchRoute');
-// const blogsRoute = require('./api/routes/BlogsRoute/BlogsRoute');
-const uploadProfilePicsRoute = require('./api/routes/uploadProfilepicRoute/uploadProfilepics');
-const { auth } = require('./api/middleware/authentication');
-const locals = require('./api/middleware/locals');
-const blogRoute = require('./api/routes/BlogsRoute/BlogsRoute');
-const author = require('./api/routes/authorRoute');
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -62,10 +61,12 @@ app.use(locals());
 
 app.use('/blogs', blogRoute);
 app.use('/api', apiRoute);
-app.use('/api/user', userRoute);
-app.use('/api/dashbord', dashbordRoute, uploadProfilePicsRoute);
+app.use('/user', userRoute);
+app.use('/dashbord', dashbordRoute, uploadProfilePicsRoute);
 app.use('/search', searchRoute);
 app.use('/author', author);
+// setRoutes(app);
+
 app.use((req, res, next) => {
     res.render('pages/404NotFound');
     // res.status(404).json({ message: 'not found!' });
@@ -80,14 +81,14 @@ app.use((err, req, res, next) => {
     if (err) {
         res.render('pages/500Server');
         // return res.status(500).json({ message: err.message });
-        console.log(err.message);
+        console.log(chalk.red.inverse(err.message));
     } else {
         res.render('pages/500Server');
         // return res.status(500).json({ message: 'there was a requesting error!' });
-        console.log('there was a requesting error!');
+        console.log(chalk.red.inverse('there was a requesting error!'));
     }
 });
 
 server.listen(process.env.PORT, () => {
-    console.log(`listen on port ${process.env.PORT}`);
+    console.log(chalk.green.inverse(`listen on port ${process.env.PORT}`));
 });

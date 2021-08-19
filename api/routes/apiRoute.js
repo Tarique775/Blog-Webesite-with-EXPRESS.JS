@@ -1,18 +1,18 @@
 const express = require('express');
 
-const { isAuth } = require('../../middleware/authentication');
+const { isAuth } = require('../middleware/authentication');
 
 const {
     postCommentController,
     postRepliesController,
-} = require('../../controllers/api_Controller/commentsAndReplies');
+} = require('../controllers/api_Controller/commentsAndReplies');
 
 const {
     getLikesController,
     getDislikesController,
-} = require('../../controllers/api_Controller/likesAndDislikes');
+} = require('../controllers/api_Controller/likesAndDislikes');
 
-const { getBookMarksController } = require('../../controllers/api_Controller/bookmarks');
+const { getBookMarksController } = require('../controllers/api_Controller/bookmarks');
 
 const router = express.Router();
 

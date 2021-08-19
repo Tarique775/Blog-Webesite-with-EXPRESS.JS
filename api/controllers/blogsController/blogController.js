@@ -51,7 +51,7 @@ const controllers = {};
 controllers.getBlogController = async (req, res, next) => {
     const filter = req.query.filter || 'latest';
     const currentPage = parseInt(req.query.page) || 1;
-    const itemPerPage = 2;
+    const itemPerPage = 5;
     const { filterObj, order } = genFilter(filter.toLowerCase());
     try {
         const posts = await Post.find(filterObj)

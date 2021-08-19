@@ -23,7 +23,7 @@ controllers.uploadProfilePics = async (req, res, next) => {
                     { new: true }
                 );
 
-                res.redirect('/api/dashbord/edit-profile');
+                res.redirect('/dashbord/edit-profile');
             } else {
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
@@ -31,7 +31,7 @@ controllers.uploadProfilePics = async (req, res, next) => {
                     { new: true }
                 );
 
-                res.redirect('/api/dashbord/create-profile');
+                res.redirect('/dashbord/create-profile');
             }
         } catch (e) {
             res.status(501).json({ profilePics: req.user.profilePics });
@@ -62,7 +62,7 @@ controllers.removeProfilePics = (req, res, next) => {
                     { new: true }
                 );
 
-                res.redirect('/api/dashbord/edit-profile');
+                res.redirect('/dashbord/edit-profile');
             } else {
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
@@ -70,7 +70,7 @@ controllers.removeProfilePics = (req, res, next) => {
                     { new: true }
                 );
 
-                res.redirect('/api/dashbord/create-profile');
+                res.redirect('/dashbord/create-profile');
             }
         });
     } catch (e) {

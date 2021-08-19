@@ -1,12 +1,12 @@
 const express = require('express');
-const { isAuth } = require('../../middleware/authentication');
-const upload = require('../../middleware/multerFileUpload');
-const postUpload = require('../../middleware/postMulterUpload');
+const { isAuth } = require('../middleware/authentication');
+const upload = require('../middleware/multerFileUpload');
+const postUpload = require('../middleware/postMulterUpload');
 const {
     uploadProfilePics,
     removeProfilePics,
     postImageController,
-} = require('../../controllers/uploadProfilePicController/uploadProfilepicController');
+} = require('../controllers/uploadProfilePicController/uploadProfilepicController');
 
 const route = express.Router();
 

@@ -6,7 +6,7 @@
           <a
             class="<%= page_name === 'dashbord' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
-            href="/api/dashbord/"
+            href="/dashbord"
             ><% if(page_name === 'dashbord') {%>
             <strong>Dashbord</strong>
             <% }else { %> Dashbord <%}%></a
@@ -16,7 +16,7 @@
           <a
             class="<%= page_name === 'create-posts' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
-            href="/api/dashbord/create-posts"
+            href="/dashbord/create-posts"
             ><% if(page_name === 'create-posts') {%>
             <strong>New Post</strong>
             <% }else { %> New Post <%}%></a
@@ -26,7 +26,7 @@
           <a
             class="<%= page_name === 'my-posts' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
-            href="/api/dashbord/posts"
+            href="/dashbord/posts"
             ><% if(page_name === 'my-posts') {%>
             <strong>My Posts</strong>
             <% }else { %> My Posts <%}%></a
@@ -36,7 +36,7 @@
           <a
             class="<%= page_name === 'bookmarks' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
-            href="/api/dashbord/bookmarks"
+            href="/dashbord/bookmarks"
             ><% if(page_name === 'bookmarks') {%>
             <strong>Bookmarks</strong>
             <% }else { %> Bookmarks <%}%></a
@@ -46,7 +46,7 @@
           <a
             class="<%= page_name === 'comments' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
-            href="/api/dashbord/comments"
+            href="/dashbord/comments"
             ><% if(page_name === 'comments') {%>
             <strong>Comments</strong>
             <% }else { %> Comments <%}%></a
@@ -56,7 +56,7 @@
           <a
             class="<%= page_name === 'edit-profile' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
-            href="/api/dashbord/edit-profile"
+            href="/dashbord/edit-profile"
             ><% if(page_name === 'edit-profile') {%>
             <strong>Edit Profile</strong>
             <% }else { %> Edit Profile <%}%></a
@@ -66,14 +66,14 @@
           <a
             class="<%= page_name === 'changePassword' ? 'nav-link active' : 'nav-link' %>"
             id="nabhober"
-            href="/api/user/change-password"
+            href="/user/change-password"
             ><% if(page_name === 'changePassword') {%>
             <strong>Change Password</strong>
             <% }else { %> Change Password <%}%></a
           >
         </li>
         <li class="nav-item align-item-center">
-          <a class="nav-link" id="nabhober" href="/api/user/logout">Logout</a>
+          <a class="nav-link" id="nabhober" href="/user/logout">Logout</a>
         </li>
       </ul>
     </div>

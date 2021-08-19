@@ -43,7 +43,7 @@ controllers.postRegister = async (req, res, next) => {
         });
         const newUser = await user.save();
         if (newUser) {
-            res.redirect('/api/user/login');
+            res.redirect('/user/login');
         }
         console.log('successfull', newUser);
     } catch (err) {
@@ -97,13 +97,13 @@ controllers.postLogin = async (req, res, next) => {
         const token = await user.getAuthToken();
         console.log(token);
         const cookie = res.cookie('jwt', token, {
-            expires: new Date(Date.now() + 30 * 60 * 1000),
+            expires: new Date(Date.now() + 60 * 60 * 1000),
             httpOnly: true,
         });
         console.log(cookie);
-        res.redirect('/api/dashbord');
+        res.redirect('/dashbord');
         // res.redirect('/');
-        // res.render('/api/user/login');
+        // res.render('/user/login');
     } catch (e) {
         next(e);
     }
@@ -114,7 +114,7 @@ controllers.postLogout = async (req, res, next) => {
         req.user.tokens = [];
         res.clearCookie('jwt');
         await req.user.save();
-        res.redirect('/api/user/login');
+        res.redirect('/user/login');
     } catch (e) {
         next(e);
     }
@@ -156,7 +156,7 @@ controllers.postChangePassword = async (req, res, next) => {
             { new: true }
         );
         if (chngPass) {
-            return res.redirect('/api/user/logout');
+            return res.redirect('/user/logout');
         }
     } catch (e) {
         next(e);

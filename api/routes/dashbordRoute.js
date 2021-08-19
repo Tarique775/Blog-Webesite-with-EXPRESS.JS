@@ -1,9 +1,9 @@
 const express = require('express');
-const dashbordController = require('../../controllers/dashboardControlers/dashbord');
-const { isAuth } = require('../../middleware/authentication');
-const { profileValidator } = require('../../controllers/dashboardControlers/profileValidation');
+const dashbordController = require('../controllers/dashboardControlers/dashbord');
+const { isAuth } = require('../middleware/authentication');
+const { profileValidator } = require('../controllers/dashboardControlers/profileValidation');
 
-const { postValidator } = require('../../controllers/dashboardControlers/postsValidation');
+const { postValidator } = require('../controllers/dashboardControlers/postsValidation');
 
 const {
     getCreatePosts,
@@ -12,9 +12,9 @@ const {
     postEditPosts,
     getDeletePosts,
     getMyPosts,
-} = require('../../controllers/dashboardControlers/posts');
+} = require('../controllers/dashboardControlers/posts');
 
-const postUpload = require('../../middleware/postMulterUpload');
+const postUpload = require('../middleware/postMulterUpload');
 
 const router = express.Router();
 

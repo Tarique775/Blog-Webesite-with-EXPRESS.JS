@@ -60,8 +60,8 @@ controllers.postCreatePosts = async (req, res, next) => {
             { $push: { posts: createPost._id } },
         );
 
-        // res.redirect(`/api/dashbord/edit-posts/${createPost._id}`);
-        res.redirect('/api/dashbord/posts');
+        // res.redirect(`/dashbord/edit-posts/${createPost._id}`);
+        res.redirect('/dashbord/posts');
     } catch (e) {
         next(e);
     }
@@ -131,7 +131,7 @@ controllers.postEditPosts = async (req, res, next) => {
             },
             { new: true }
         );
-        res.redirect(`/api/dashbord/edit-posts/${editPost._id}`);
+        res.redirect(`/dashbord/edit-posts/${editPost._id}`);
     } catch (e) {
         next(e);
     }
@@ -149,7 +149,7 @@ controllers.getDeletePosts = async (req, res, next) => {
         await Post.findOneAndDelete({ _id: postId });
         await Profile.findOneAndUpdate({ user: req.user._id }, { $pull: { posts: postId } });
 
-        res.redirect('/api/dashbord/posts');
+        res.redirect('/dashbord/posts');
     } catch (e) {
         next(e);
     }

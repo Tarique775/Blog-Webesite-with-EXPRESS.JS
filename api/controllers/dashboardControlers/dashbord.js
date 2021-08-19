@@ -25,7 +25,7 @@ controllers.getDashbord = async (req, res, next) => {
                 bookmarks: profile.bookmarks,
             });
         }
-        res.redirect('/api/dashbord/create-profile');
+        res.redirect('/dashbord/create-profile');
     } catch (e) {
         next(e);
     }
@@ -36,7 +36,7 @@ controllers.getCreateProfile = async (req, res, next) => {
         const profile = await Profile.findOne({ user: req.user._id });
         // console.log(profile);
         if (profile) {
-            return res.redirect('/api/dashbord/edit-profile');
+            return res.redirect('/dashbord/edit-profile');
         }
         res.render('pages/dashbord/create-profile', {
             error: {},
@@ -91,7 +91,7 @@ controllers.postCreateProfile = async (req, res, next) => {
             { $set: { profile: createProfile._id } },
             { new: true }
         );
-        res.redirect('/api/dashbord/');
+        res.redirect('/dashbord');
     } catch (e) {
         next(e);
     }
@@ -102,7 +102,7 @@ controllers.getEditProfile = async (req, res, next) => {
         const profile = await Profile.findOne({ user: req.user._id });
         // console.log(profile);
         if (!profile) {
-            return res.redirect('/api/dashbord/create-profile');
+            return res.redirect('/dashbord/create-profile');
         }
         res.render('pages/dashbord/edit-profile', {
             error: {},
