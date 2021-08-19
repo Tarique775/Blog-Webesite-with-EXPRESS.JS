@@ -2,9 +2,7 @@ const fs = require('fs');
 const User = require('../../models/user');
 const Profile = require('../../models/profile');
 
-const controllers = {};
-
-controllers.uploadProfilePics = async (req, res, next) => {
+exports.uploadProfilePics = async (req, res, next) => {
     if (req.file) {
         try {
             const profile = await Profile.findOne({ user: req.user._id });
@@ -14,13 +12,13 @@ controllers.uploadProfilePics = async (req, res, next) => {
                 await Profile.findOneAndUpdate(
                     { user: req.user._id },
                     { $set: { profilePics } },
-                    { new: true }
+                    { new: true },
                 );
 
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/dashbord/edit-profile');
@@ -28,7 +26,7 @@ controllers.uploadProfilePics = async (req, res, next) => {
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/dashbord/create-profile');
@@ -41,7 +39,7 @@ controllers.uploadProfilePics = async (req, res, next) => {
     }
 };
 
-controllers.removeProfilePics = (req, res, next) => {
+exports.removeProfilePics = (req, res, next) => {
     try {
         const defaultProfilePic = '/uploads/profilePics/default.png';
         const currentProfilePic = req.user.profilePics;
@@ -53,13 +51,13 @@ controllers.removeProfilePics = (req, res, next) => {
                 await Profile.findOneAndUpdate(
                     { user: req.user._id },
                     { $set: { profilePics: defaultProfilePic } },
-                    { new: true }
+                    { new: true },
                 );
 
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics: defaultProfilePic } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/dashbord/edit-profile');
@@ -67,7 +65,7 @@ controllers.removeProfilePics = (req, res, next) => {
                 await User.findOneAndUpdate(
                     { _id: req.user._id },
                     { $set: { profilePics: defaultProfilePic } },
-                    { new: true }
+                    { new: true },
                 );
 
                 res.redirect('/dashbord/create-profile');
@@ -78,7 +76,7 @@ controllers.removeProfilePics = (req, res, next) => {
     }
 };
 
-controllers.postImageController = (req, res, next) => {
+exports.postImageController = (req, res, next) => {
     if (req.file) {
         return res.status(200).json({
             imgUrl: `/uploads/postImage/${req.file.filename}`,
@@ -88,5 +86,3 @@ controllers.postImageController = (req, res, next) => {
         message: 'Server Error',
     });
 };
-
-module.exports = controllers;

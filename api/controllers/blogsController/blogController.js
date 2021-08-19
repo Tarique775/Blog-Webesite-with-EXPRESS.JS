@@ -13,32 +13,32 @@ function genFilter(filter) {
     let order = 1;
 
     switch (filter) {
-        case 'latest': {
-            order = 1;
-            break;
-        }
-        case 'week': {
-            filterObj = {
-                createdAt: {
-                    $gt: genDate(7),
-                },
-            };
-            order = -1;
-            break;
-        }
-        case 'month': {
-            filterObj = {
-                createdAt: {
-                    $gt: genDate(30),
-                },
-            };
-            order = -1;
-            break;
-        }
-        case 'all': {
-            order = -1;
-            break;
-        }
+    case 'latest': {
+        order = 1;
+        break;
+    }
+    case 'week': {
+        filterObj = {
+            createdAt: {
+                $gt: genDate(7),
+            },
+        };
+        order = -1;
+        break;
+    }
+    case 'month': {
+        filterObj = {
+            createdAt: {
+                $gt: genDate(30),
+            },
+        };
+        order = -1;
+        break;
+    }
+    case 'all': {
+        order = -1;
+        break;
+    }
     }
     return {
         filterObj,
@@ -46,9 +46,7 @@ function genFilter(filter) {
     };
 }
 
-const controllers = {};
-
-controllers.getBlogController = async (req, res, next) => {
+exports.getBlogController = async (req, res, next) => {
     const filter = req.query.filter || 'latest';
     const currentPage = parseInt(req.query.page) || 1;
     const itemPerPage = 5;
@@ -88,7 +86,7 @@ controllers.getBlogController = async (req, res, next) => {
     }
 };
 
-controllers.singlePostGetController = async (req, res, next) => {
+exports.singlePostGetController = async (req, res, next) => {
     const { postId } = req.params;
     try {
         const post = await Post.findById(postId)
@@ -133,5 +131,3 @@ controllers.singlePostGetController = async (req, res, next) => {
         next(e);
     }
 };
-
-module.exports = controllers;

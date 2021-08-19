@@ -2,9 +2,7 @@ const Post = require('../../models/post');
 
 const Comment = require('../../models/comment');
 
-const controllers = {};
-
-controllers.postCommentController = async (req, res, next) => {
+exports.postCommentController = async (req, res, next) => {
     const { postId } = req.params;
 
     const { body } = req.body;
@@ -43,7 +41,7 @@ controllers.postCommentController = async (req, res, next) => {
     }
 };
 
-controllers.postRepliesController = async (req, res, next) => {
+exports.postRepliesController = async (req, res, next) => {
     const { commentId } = req.params;
 
     const { body } = req.body;
@@ -76,5 +74,3 @@ controllers.postRepliesController = async (req, res, next) => {
         });
     }
 };
-
-module.exports = controllers;

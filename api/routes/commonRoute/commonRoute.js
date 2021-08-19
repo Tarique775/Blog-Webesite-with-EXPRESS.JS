@@ -21,7 +21,11 @@ const router = [
     },
     {
         path: '/dashbord',
-        handler: { dashbordRoute, uploadProfilePicsRoute },
+        handler: dashbordRoute,
+    },
+    {
+        path: '/dashbord',
+        handler: uploadProfilePicsRoute,
     },
     {
         path: '/search',

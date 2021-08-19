@@ -4,9 +4,7 @@ const { errorFormetter } = require('./postsValidation');
 const Profile = require('../../models/profile');
 const Post = require('../../models/post');
 
-const controllers = {};
-
-controllers.getCreatePosts = (req, res, next) => {
+exports.getCreatePosts = (req, res, next) => {
     res.render('pages/dashbord/posts/create-posts', {
         error: {},
         value: {},
@@ -14,7 +12,7 @@ controllers.getCreatePosts = (req, res, next) => {
     });
 };
 
-controllers.postCreatePosts = async (req, res, next) => {
+exports.postCreatePosts = async (req, res, next) => {
     const { title, body } = req.body;
     let { tags } = req.body;
 
@@ -57,7 +55,7 @@ controllers.postCreatePosts = async (req, res, next) => {
         const createPost = await post.save();
         await Profile.findOneAndUpdate(
             { user: req.user._id },
-            { $push: { posts: createPost._id } },
+            { $push: { posts: createPost._id } }
         );
 
         // res.redirect(`/dashbord/edit-posts/${createPost._id}`);
@@ -67,7 +65,7 @@ controllers.postCreatePosts = async (req, res, next) => {
     }
 };
 
-controllers.getEditPosts = async (req, res, next) => {
+exports.getEditPosts = async (req, res, next) => {
     const { postId } = req.params;
 
     try {
@@ -89,7 +87,7 @@ controllers.getEditPosts = async (req, res, next) => {
     }
 };
 
-controllers.postEditPosts = async (req, res, next) => {
+exports.postEditPosts = async (req, res, next) => {
     let { title, body, tags } = req.body;
     const { postId } = req.params;
     const errors = validationResult(req).formatWith(errorFormetter);
@@ -129,7 +127,7 @@ controllers.postEditPosts = async (req, res, next) => {
                     thumbnail,
                 },
             },
-            { new: true }
+            { new: true },
         );
         res.redirect(`/dashbord/edit-posts/${editPost._id}`);
     } catch (e) {
@@ -137,7 +135,7 @@ controllers.postEditPosts = async (req, res, next) => {
     }
 };
 
-controllers.getDeletePosts = async (req, res, next) => {
+exports.getDeletePosts = async (req, res, next) => {
     const { postId } = req.params;
     try {
         const post = await Post.findOne({ author: req.user._id, _id: postId });
@@ -155,7 +153,7 @@ controllers.getDeletePosts = async (req, res, next) => {
     }
 };
 
-controllers.getMyPosts = async (req, res, next) => {
+exports.getMyPosts = async (req, res, next) => {
     try {
         const posts = await Post.find({ author: req.user._id });
         res.render('pages/dashbord/posts/my-posts', {
@@ -166,5 +164,3 @@ controllers.getMyPosts = async (req, res, next) => {
         next(e);
     }
 };
-
-module.exports = controllers;

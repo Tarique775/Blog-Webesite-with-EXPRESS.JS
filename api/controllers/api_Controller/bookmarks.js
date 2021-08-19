@@ -1,8 +1,6 @@
 const Profile = require('../../models/profile');
 
-const controllers = {};
-
-controllers.getBookMarksController = async (req, res, next) => {
+exports.getBookMarksController = async (req, res, next) => {
     const { postId } = req.params;
 
     if (!req.user) {
@@ -37,5 +35,3 @@ controllers.getBookMarksController = async (req, res, next) => {
         });
     }
 };
-
-module.exports = controllers;

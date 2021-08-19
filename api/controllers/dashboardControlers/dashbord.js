@@ -4,9 +4,7 @@ const User = require('../../models/user');
 const Comment = require('../../models/comment');
 const { errorFormetter } = require('./profileValidation');
 
-const controllers = {};
-
-controllers.getDashbord = async (req, res, next) => {
+exports.getDashbord = async (req, res, next) => {
     try {
         const profile = await Profile.findOne({ user: req.user._id })
             .populate({
@@ -31,7 +29,7 @@ controllers.getDashbord = async (req, res, next) => {
     }
 };
 
-controllers.getCreateProfile = async (req, res, next) => {
+exports.getCreateProfile = async (req, res, next) => {
     try {
         const profile = await Profile.findOne({ user: req.user._id });
         // console.log(profile);
@@ -48,9 +46,9 @@ controllers.getCreateProfile = async (req, res, next) => {
     }
 };
 
-controllers.postCreateProfile = async (req, res, next) => {
-    const {
- name, title, bio, website, facebook, twitter, github, } = req.body;
+exports.postCreateProfile = async (req, res, next) => {
+    const { name, title, bio, website, facebook, twitter, github 
+} = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -89,7 +87,7 @@ controllers.postCreateProfile = async (req, res, next) => {
         await User.findOneAndUpdate(
             { _id: req.user._id },
             { $set: { profile: createProfile._id } },
-            { new: true }
+            { new: true },
         );
         res.redirect('/dashbord');
     } catch (e) {
@@ -97,7 +95,7 @@ controllers.postCreateProfile = async (req, res, next) => {
     }
 };
 
-controllers.getEditProfile = async (req, res, next) => {
+exports.getEditProfile = async (req, res, next) => {
     try {
         const profile = await Profile.findOne({ user: req.user._id });
         // console.log(profile);
@@ -114,9 +112,9 @@ controllers.getEditProfile = async (req, res, next) => {
     }
 };
 
-controllers.postEditProfile = async (req, res, next) => {
-    const {
- name, title, bio, website, facebook, twitter, github, } = req.body;
+exports.postEditProfile = async (req, res, next) => {
+    const { name, title, bio, website, facebook, twitter, github 
+} = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -153,7 +151,7 @@ controllers.postEditProfile = async (req, res, next) => {
         const updateProfile = await Profile.findOneAndUpdate(
             { user: req.user._id },
             { $set: profile },
-            { new: true }
+            { new: true },
         );
 
         res.render('pages/dashbord/edit-profile', {
@@ -166,7 +164,7 @@ controllers.postEditProfile = async (req, res, next) => {
     }
 };
 
-controllers.getBookmarks = async (req, res, next) => {
+exports.getBookmarks = async (req, res, next) => {
     try {
         const profile = await Profile.findOne({ user: req.user._id }).populate({
             path: 'bookmarks',
@@ -182,7 +180,7 @@ controllers.getBookmarks = async (req, res, next) => {
     }
 };
 
-controllers.getComments = async (req, res, next) => {
+exports.getComments = async (req, res, next) => {
     try {
         const profile = await Profile.findOne({ user: req.user._id });
         const comments = await Comment.find({ post: { $in: profile.posts } })
@@ -206,5 +204,3 @@ controllers.getComments = async (req, res, next) => {
         next(e);
     }
 };
-
-module.exports = controllers;

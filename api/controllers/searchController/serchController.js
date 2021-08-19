@@ -1,8 +1,6 @@
 const Post = require('../../models/post');
 
-const controllers = {};
-
-controllers.getSearchController = async (req, res, next) => {
+exports.getSearchController = async (req, res, next) => {
     const term = req.query.term || 'latest';
     const currentPage = parseInt(req.query.page) || 1;
     const itemPerPage = 5;
@@ -35,5 +33,3 @@ controllers.getSearchController = async (req, res, next) => {
         next(e);
     }
 };
-
-module.exports = controllers;

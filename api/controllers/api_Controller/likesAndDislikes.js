@@ -1,8 +1,6 @@
 const Post = require('../../models/post');
 
-const controllers = {};
-
-controllers.getLikesController = async (req, res, next) => {
+exports.getLikesController = async (req, res, next) => {
     const { postId } = req.params;
 
     if (!req.user) {
@@ -45,7 +43,7 @@ controllers.getLikesController = async (req, res, next) => {
     }
 };
 
-controllers.getDislikesController = async (req, res, next) => {
+exports.getDislikesController = async (req, res, next) => {
     const { postId } = req.params;
 
     if (!req.user) {
@@ -88,5 +86,3 @@ controllers.getDislikesController = async (req, res, next) => {
         });
     }
 };
-
-module.exports = controllers;

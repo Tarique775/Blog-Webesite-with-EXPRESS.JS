@@ -4,9 +4,7 @@ const User = require('../../models/user');
 const { errorFormetter } = require('./userValidation');
 const { errorFormet } = require('./loginValidator');
 
-const controllers = {};
-
-controllers.getRegister = (req, res, next) => {
+exports.getRegister = (req, res, next) => {
     res.render('pages/user/register', {
         error: {},
         value: {},
@@ -15,9 +13,9 @@ controllers.getRegister = (req, res, next) => {
     });
 };
 
-controllers.postRegister = async (req, res, next) => {
-    const { userName, email, password, confirmPassword 
-} = req.body;
+exports.postRegister = async (req, res, next) => {
+    const {
+ userName, email, password, confirmPassword, } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -51,7 +49,7 @@ controllers.postRegister = async (req, res, next) => {
     }
 };
 
-controllers.getLogin = (req, res, next) => {
+exports.getLogin = (req, res, next) => {
     res.render('pages/user/login', {
         error: {},
         value: {},
@@ -61,7 +59,7 @@ controllers.getLogin = (req, res, next) => {
     });
 };
 
-controllers.postLogin = async (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
     const errors = validationResult(req).formatWith(errorFormet);
     if (!errors.isEmpty()) {
         return res.render('pages/user/login', {
@@ -109,7 +107,7 @@ controllers.postLogin = async (req, res, next) => {
     }
 };
 
-controllers.postLogout = async (req, res, next) => {
+exports.postLogout = async (req, res, next) => {
     try {
         req.user.tokens = [];
         res.clearCookie('jwt');
@@ -120,7 +118,7 @@ controllers.postLogout = async (req, res, next) => {
     }
 };
 
-controllers.getChangePassword = (req, res, next) => {
+exports.getChangePassword = (req, res, next) => {
     res.render('pages/user/changePassword', {
         error: {},
         value: {},
@@ -129,7 +127,7 @@ controllers.getChangePassword = (req, res, next) => {
     });
 };
 
-controllers.postChangePassword = async (req, res, next) => {
+exports.postChangePassword = async (req, res, next) => {
     const { oldPassword, newPassword, confirmPassword } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormet);
@@ -153,7 +151,7 @@ controllers.postChangePassword = async (req, res, next) => {
         const chngPass = await User.findOneAndUpdate(
             { _id: req.user._id },
             { $set: { password: hash } },
-            { new: true }
+            { new: true },
         );
         if (chngPass) {
             return res.redirect('/user/logout');
@@ -162,5 +160,3 @@ controllers.postChangePassword = async (req, res, next) => {
         next(e);
     }
 };
-
-module.exports = controllers;

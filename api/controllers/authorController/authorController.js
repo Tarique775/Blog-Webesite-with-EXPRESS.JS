@@ -1,8 +1,6 @@
 const User = require('../../models/user');
 
-const controllers = {};
-
-controllers.getAuthorController = async (req, res, next) => {
+exports.getAuthorController = async (req, res, next) => {
     const { userId } = req.params;
     try {
         const author = await User.findById(userId).populate({
@@ -19,5 +17,3 @@ controllers.getAuthorController = async (req, res, next) => {
         next(e);
     }
 };
-
-module.exports = controllers;
