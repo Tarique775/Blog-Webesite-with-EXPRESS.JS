@@ -1,4 +1,4 @@
-const socket = io('http://localhost:5000');
+const socket = io('http://localhost:8080');
 
 const comment = document.getElementById('comment');
 const commentHolder = document.getElementById('comment-holder');
@@ -98,8 +98,8 @@ function createComment(comment) {
             href="/author/${comment.user._id}"
             style="text-decoration: none; color: currentColor"
             ><img src="${
-                comment.user.profilePics
-            }" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/></a>
+    comment.user.profilePics
+}" class="align-self-start rounded-circle mx-3 my-3" style="width: 40px"/></a>
             </div>
             <div class="flex-grow-0 col-md-9 my-3">
             <div class="bg-light border border-1 rounded-3 p-2">
@@ -113,8 +113,8 @@ function createComment(comment) {
     
                 <div class="my-3">
                     <input type="text" class="form-control" placeholder="Press Enter to Reply" name="reply" data-comment=${
-                        comment._id
-                    }/>
+    comment._id
+}/>
                 </div>
             </div>
       `;
@@ -132,8 +132,8 @@ function createReplyElement(reply) {
     href="/author/${reply.user._id}"
     style="text-decoration: none; color: currentColor"
     ><img src="${
-    reply.user.profilePics
-    }" class="align-self-start me-3 rounded-circle" style="width: 40px"/></a></div>
+        reply.user.profilePics
+}" class="align-self-start me-3 rounded-circle" style="width: 40px"/></a></div>
         <div class="flex-grow-0 col-md-10">
         <div class="bg-light border border-1 rounded-3 p-2">
         <a
