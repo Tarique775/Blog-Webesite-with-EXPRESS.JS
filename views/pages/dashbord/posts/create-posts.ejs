@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create-Posts</title>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/tinymce/jquery.tinymce.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/tinymce/tinymce.min.js"
+    ></script>
+    <script type="text/javascript" src="/scripts/init-tinymce.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-light">
+    <%- include('../../nabbar.ejs') -%>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2"><%-include('../../dashbord-nav.ejs') -%></div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <div class="card card-body my-5">
+                <h4>Create A New Post</h4>
+                <form
+                  action="/dashbord/create-posts"
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group">
+                    <label for="title">Enter Your Post Title</label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      class="form-control <%= error.title ?'is-invalid' : ''%>"
+                      value="<%= value.title ? value.title : ''%>"
+                    />
+                    <div class="invalid-feedback">
+                      <strong><%=error.title && error.title%></strong>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <label for="tiny-mce-post-body">Enter Your Post Body</label>
+                    <textarea
+                      name="body"
+                      id="tiny-mce-post-body"
+                      class="form-control <%= error.body ?'is-invalid' : ''%>"
+                    >
+<%= value.body ? value.body : ''%></textarea
+                    >
+                    <div class="invalid-feedback">
+                      <strong><%=error.body && error.body%></strong>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <label for="tags">Enter Your Tags (Max 10)</label>
+                    <input
+                      type="text"
+                      name="tags"
+                      id="tags"
+                      placeholder="tag1, tag2, tag3"
+                      class="form-control"
+                    />
+                  </div>
+                  <br />
+
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label"
+                      >Choose A Photo</label
+                    >
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="formFile"
+                      name="photo"
+                    />
+                  </div>
+                  <input
+                    type="submit"
+                    class="btn btn-primary"
+                    value="Create Post"
+                  />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('../../footer.ejs') -%>
+  </body>
+</html>
