@@ -27,77 +27,85 @@
         <div class="col-md-2"><%-include('../../dashbord-nav.ejs') -%></div>
         <div class="col-md-10">
           <div class="row">
-        <div class="col-md-8 offset-md-1">
-          <div class="card card-body my-5">
-            <h4>Create A New Post</h4>
-            
-            <form
-              action="/dashbord/create-posts"
-              method="POST"
-              
-              enctype="multipart/form-data"
-            >
-              <div class="form-group">
-                <label for="title">Enter Your Post Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  class="form-control <%= error.title ?'is-invalid' : ''%>"
-                  value="<%= value.title ? value.title : ''%>"
-                />
-                <div class="invalid-feedback">
-                  <strong><%=error.title && error.title%></strong>
-                </div>
+            <div class="col-md-8 offset-md-1">
+              <div class="card card-body my-5">
+                <h4>Create A New Post</h4>
+
+                <form
+                  action="/dashbord/create-posts"
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group">
+                    <label for="title">Enter Your Post Title</label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      class="form-control <%= error.title ?'is-invalid' : ''%>"
+                      value="<%= value.title ? value.title : ''%>"
+                    />
+                    <div class="invalid-feedback">
+                      <strong><%=error.title && error.title%></strong>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <label for="tiny-mce-post-body">Enter Your Post Body</label>
+                    <textarea
+                      name="body"
+                      id="tiny-mce-post-body"
+                      class="form-control <%= error.body ?'is-invalid' : ''%>"
+                    >
+<%= value.body ? value.body : ''%></textarea
+                    >
+                    <div class="invalid-feedback">
+                      <strong><%=error.body && error.body%></strong>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="form-group">
+                    <label for="tags">Enter Your Tags (Max 10)</label>
+                    <input
+                      type="text"
+                      name="tags"
+                      id="tags"
+                      placeholder="tag1, tag2, tag3"
+                      class="form-control"
+                    />
+                  </div>
+                  <br />
+
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label"
+                      >Choose A Photo</label
+                    >
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="formFile"
+                      name="photo"
+                    />
+                  </div>
+                  <input
+                    type="submit"
+                    class="btn btn-primary"
+                    value="Create Post"
+                  />
+                </form>
               </div>
-              <br>
-              <div class="form-group">
-                <label for="tiny-mce-post-body">Enter Your Post Body</label>
-                <textarea
-                  name="body"
-                  id="tiny-mce-post-body"
-                  class="form-control <%= error.body ?'is-invalid' : ''%>"
-                ><%= value.body ? value.body : ''%></textarea>
-                <div class="invalid-feedback">
-                  <strong><%=error.body && error.body%></strong>
-                </div>
-              </div>
-              <br>
-              <div class="form-group">
-                <label for="tags">Enter Your Tags (Max 10)</label>
-                <input
-                  type="text"
-                  name="tags"
-                  id="tags"
-                  placeholder="tag1, tag2, tag3"
-                  class="form-control"
-                />
-              </div>
-              <br>
-              
-                <div class="mb-3">
-                  <label for="formFile" class="form-label"
-                    >Choose A Photo</label
-                  >
-                  <input class="form-control" type="file" id="formFile" name="photo" />
-                 
-                </div>
-              <input
-                type="submit"
-                class="btn btn-primary "
-                value="Create Post"
-              />
-            </form>
+            </div>
           </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
     </div>
-    <%- include('../../footer.ejs') -%>
-     <script src="https://cdn.tiny.cloud/1/lrpil8nsgi9viih3y7q30s0nqxeaqfwgn6s104vgbxzi2va5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-     <script src="/scripts/tinymce.js"></script>
+    <%- include('../../footer.ejs') -%>
+    <script
+      src="https://cdn.tiny.cloud/1/lrpil8nsgi9viih3y7q30s0nqxeaqfwgn6s104vgbxzi2va5/tinymce/5/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+
+    <script src="/scripts/tinymce.js"></script>
   </body>
 </html>
