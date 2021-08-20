@@ -9,7 +9,9 @@ const chalk = require('chalk');
 
 const app = express();
 const server = http.createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+    cors,
+});
 
 global.io = io;
 
@@ -27,7 +29,7 @@ const mongoDBConnect = async () => {
                 useUnifiedTopology: true,
                 useFindAndModify: false,
                 useCreateIndex: true,
-            },
+            }
         );
         if (mongooseConnect) {
             return console.log(chalk.green.inverse('Database Conected Successfully!'));
