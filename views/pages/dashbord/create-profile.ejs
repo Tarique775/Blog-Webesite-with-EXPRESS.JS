@@ -29,7 +29,7 @@
           <div class="row">
             <div class="col-md-8 offset-md-1">
               <div class="card card-body my-5">
-                <h4>Create Your Profile</h4>
+                <h4 class="mb-3">Create Your Profile</h4>
                 <div class="profile-pics">
                   <img
                     src="<%=user.profilePics%>"
@@ -106,11 +106,10 @@
                   </form>
                 </div>
 
-                <br />
                 <div>
                   <form action="/dashbord/create-profile" method="POST">
-                    <div class="form-group">
-                      <label for="name">Enter Your Name</label>
+                    <div class="form-group mb-3">
+                      <h6 for="name" class="mb-2">Enter Your Name</h6>
                       <input
                         type="text"
                         class="form-control <%= error.name ?'is-invalid' : ''%>"
@@ -123,9 +122,9 @@
                         <strong><%=error.name && error.name%></strong>
                       </div>
                     </div>
-                    <br />
-                    <div class="form-group">
-                      <label for="email">Enter Your Email</label>
+
+                    <div class="form-group mb-3">
+                      <h6 for="email" class="mb-2">Enter Your Email</h6>
                       <input
                         type="email"
                         class="form-control"
@@ -136,9 +135,9 @@
                         disabled
                       />
                     </div>
-                    <br />
-                    <div class="form-group">
-                      <label for="title">Enter Your Title</label>
+
+                    <div class="form-group mb-3">
+                      <h6 for="title" class="mb-2">Enter Your Title</h6>
                       <input
                         type="text"
                         class="form-control <%= error.title ?'is-invalid' : ''%>"
@@ -151,9 +150,9 @@
                         <strong><%=error.title && error.title%></strong>
                       </div>
                     </div>
-                    <br />
-                    <div class="form-group">
-                      <label for="bio">Enter Your Bio</label>
+
+                    <div class="form-group mb-3">
+                      <h6 for="bio" class="mb-2">Enter Your Bio</h6>
                       <textarea
                         name="bio"
                         id="bio"
@@ -165,9 +164,9 @@
                         <strong><%=error.bio && error.bio%></strong>
                       </div>
                     </div>
-                    <br />
+
                     <div>
-                      <p class="lead">Your Social Links</p>
+                      <h5>Your Social Links</h5>
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text">

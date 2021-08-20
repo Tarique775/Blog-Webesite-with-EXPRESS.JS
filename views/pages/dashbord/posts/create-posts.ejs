@@ -34,14 +34,14 @@
           <div class="row">
             <div class="col-md-8 offset-md-1">
               <div class="card card-body my-5">
-                <h4>Create A New Post</h4>
+                <h4 class="mb-3">Create A New Post</h4>
                 <form
                   action="/dashbord/create-posts"
                   method="POST"
                   enctype="multipart/form-data"
                 >
-                  <div class="form-group">
-                    <label for="title">Enter Your Post Title</label>
+                  <div class="form-group mb-3">
+                    <h6 for="title" class="mb-2">Enter Your Post Title</h6>
                     <input
                       type="text"
                       name="title"
@@ -53,9 +53,11 @@
                       <strong><%=error.title && error.title%></strong>
                     </div>
                   </div>
-                  <br />
-                  <div class="form-group">
-                    <label for="tiny-mce-post-body">Enter Your Post Body</label>
+
+                  <div class="form-group mb-3">
+                    <h6 for="tiny-mce-post-body" class="mb-2">
+                      Enter Your Post Body
+                    </h6>
                     <textarea
                       name="body"
                       id="tiny-mce-post-body"
@@ -67,9 +69,9 @@
                       <strong><%=error.body && error.body%></strong>
                     </div>
                   </div>
-                  <br />
-                  <div class="form-group">
-                    <label for="tags">Enter Your Tags (Max 10)</label>
+
+                  <div class="form-group mb-3">
+                    <h6 for="tags" class="mb-2">Enter Your Tags (Max 10)</h6>
                     <input
                       type="text"
                       name="tags"
@@ -78,12 +80,9 @@
                       class="form-control"
                     />
                   </div>
-                  <br />
 
                   <div class="mb-3">
-                    <label for="formFile" class="form-label"
-                      >Choose A Photo</label
-                    >
+                    <h6 for="formFile" class="form-h6">Choose A Photo</h6>
                     <input
                       class="form-control"
                       type="file"
@@ -93,7 +92,7 @@
                   </div>
                   <input
                     type="submit"
-                    class="btn btn-primary"
+                    class="btn btn-primary mb-2"
                     value="Create Post"
                   />
                 </form>
