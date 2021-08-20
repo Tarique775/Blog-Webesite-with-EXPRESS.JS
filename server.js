@@ -20,12 +20,15 @@ const { notFoundHandler, errorHandler } = require('./api/middleware/errorHandler
 
 const mongoDBConnect = async () => {
     try {
-        const mongooseConnect = await mongoose.connect(process.env.MONGODB, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true,
-        });
+        const mongooseConnect = await mongoose.connect(
+            `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASSWORD}@cluster0.9olvr.mongodb.net/Blog_website?retryWrites=true&w=majority`,
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useFindAndModify: false,
+                useCreateIndex: true,
+            },
+        );
         if (mongooseConnect) {
             return console.log(chalk.green.inverse('Database Conected Successfully!'));
         }

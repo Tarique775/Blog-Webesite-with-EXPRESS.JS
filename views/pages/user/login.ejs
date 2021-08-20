@@ -20,7 +20,7 @@
           <div class="card card-body rounded-3 my-4 mx-5">
             <h1 class="text-center mb-3">Login</h1>
 
-            <% if(Email !=''){ %>
+            <% if(Email !==''){ %>
             <div
               class="alert alert-warning alert-dismissible fade show mx-5"
               role="alert"
@@ -33,7 +33,7 @@
                 aria-label="Close"
               ></button>
             </div>
-            <% } if(Password !=''){ %>
+            <% } if(Password !==''){ %>
             <div
               class="alert alert-warning alert-dismissible fade show mx-5"
               role="alert"
@@ -86,7 +86,7 @@
             </form>
             <p class="text-center">
               Don't have an account?
-              <a href="/user/register" style="text-decoration: none">Sign Up</a>
+              <a href="/user/signup" style="text-decoration: none">SignUp</a>
             </p>
           </div>
         </div>

@@ -11,9 +11,9 @@ const router = express.Router();
 
 router.get('/');
 
-router.get('/register', userController.getRegister);
+router.get('/signup', userController.getRegister);
 
-router.post('/register', userValidator, userController.postRegister);
+router.post('/signup', userValidator, userController.postRegister);
 
 router.get('/login', userController.getLogin);
 

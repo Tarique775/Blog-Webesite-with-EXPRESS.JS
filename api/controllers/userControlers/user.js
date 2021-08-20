@@ -151,7 +151,7 @@ exports.postChangePassword = async (req, res, next) => {
         const chngPass = await User.findOneAndUpdate(
             { _id: req.user._id },
             { $set: { password: hash } },
-            { new: true },
+            { new: true }
         );
         if (chngPass) {
             return res.redirect('/user/logout');

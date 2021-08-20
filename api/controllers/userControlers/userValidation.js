@@ -1,10 +1,10 @@
 const { body } = require('express-validator');
 const User = require('../../models/user');
 
-const userValidator = [
+exports.userValidator = [
     body('userName')
-        .isLength({ min: 3, max: 20 })
-        .withMessage('UserName must be between 3 to 20 chars')
+        .isLength({ min: 3, max: 15 })
+        .withMessage('UserName must be between 3 to 15 chars')
         .custom(async (userName) => {
             const user = await User.findOne({ userName });
             if (user) {
@@ -15,7 +15,8 @@ const userValidator = [
 
     body('email')
         .matches(
-            /^([a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,7})$/gm,
+            /^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$/,
+            'g'
         )
         .withMessage('Please provide a valid email')
         .custom(async (email) => {
@@ -27,7 +28,11 @@ const userValidator = [
         .trim(),
 
     body('password')
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm)
+        .isLength({ min: 1 })
+        .matches(
+            /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/,
+            'g'
+        )
         .withMessage(
             'Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character'
         )
@@ -35,7 +40,7 @@ const userValidator = [
 
     body('confirmPassword')
         .custom((confirmPassword, { req }) => {
-            if (confirmPassword != req.body.password) {
+            if (confirmPassword !== req.body.password) {
                 throw new Error("Password does't match");
             }
             return true;
@@ -43,6 +48,4 @@ const userValidator = [
         .trim(),
 ];
 
-const errorFormetter = (err) => err.msg;
-
-module.exports = { userValidator, errorFormetter };
+exports.errorFormetter = (err) => err.msg;
