@@ -1,5 +1,8 @@
+// for localhost
 // const socket = io('http://localhost:5000');
+// for deploy
 const socket = io('https://web-blog-bd.herokuapp.com');
+
 const comment = document.getElementById('comment');
 const commentHolder = document.getElementById('comment-holder');
 
