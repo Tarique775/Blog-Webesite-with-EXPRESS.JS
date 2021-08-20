@@ -24,7 +24,7 @@ const router = [
         handler: dashbordRoute,
     },
     {
-        path: '/dashbord',
+        path: '/uploads',
         handler: uploadProfilePicsRoute,
     },
     {

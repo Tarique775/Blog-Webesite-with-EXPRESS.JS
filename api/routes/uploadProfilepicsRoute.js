@@ -10,10 +10,10 @@ const {
 
 const route = express.Router();
 
-route.post('/uploads/profilePics', isAuth, upload.single('profilePics'), uploadProfilePics);
+route.post('/profilePics', isAuth, upload.single('profilePics'), uploadProfilePics);
 
-route.post('/uploads/removeProfilePics', isAuth, removeProfilePics);
+route.post('/removeProfilePics', isAuth, removeProfilePics);
 
-route.post('/uploads/postimage', isAuth, postUpload.single('post-image'), postImageController);
+route.post('/postimage', isAuth, postUpload.single('post-image'), postImageController);
 
 module.exports = route;
