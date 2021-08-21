@@ -14,8 +14,8 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.postRegister = async (req, res, next) => {
-    const {
- userName, email, password, confirmPassword, } = req.body;
+    const { userName, email, password, confirmPassword 
+} = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -94,10 +94,13 @@ exports.postLogin = async (req, res, next) => {
         }
         const token = await user.getAuthToken();
         console.log(token);
-        const cookie = res.cookie('jwt', token, {
+        const cookie = res.cookie('moketest', token, {
             expires: new Date(Date.now() + 60 * 60 * 1000),
             httpOnly: true,
         });
+        if (!cookie) {
+            return res.redirect('/user/login');
+        }
         console.log(cookie);
         res.redirect('/dashbord');
         // res.redirect('/');
@@ -110,7 +113,7 @@ exports.postLogin = async (req, res, next) => {
 exports.postLogout = async (req, res, next) => {
     try {
         req.user.tokens = [];
-        res.clearCookie('jwt');
+        res.clearCookie('moktest');
         await req.user.save();
         res.redirect('/user/login');
     } catch (e) {
@@ -151,7 +154,7 @@ exports.postChangePassword = async (req, res, next) => {
         const chngPass = await User.findOneAndUpdate(
             { _id: req.user._id },
             { $set: { password: hash } },
-            { new: true }
+            { new: true },
         );
         if (chngPass) {
             return res.redirect('/user/logout');
