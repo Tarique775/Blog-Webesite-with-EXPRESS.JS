@@ -14,8 +14,8 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.postRegister = async (req, res, next) => {
-    const { userName, email, password, confirmPassword 
-} = req.body;
+    const {
+ userName, email, password, confirmPassword, } = req.body;
 
     const errors = validationResult(req).formatWith(errorFormetter);
     if (!errors.isEmpty()) {
@@ -98,9 +98,6 @@ exports.postLogin = async (req, res, next) => {
             expires: new Date(Date.now() + 60 * 60 * 1000),
             httpOnly: true,
         });
-        if (!cookie) {
-            return res.redirect('/user/login');
-        }
         console.log(cookie);
         res.redirect('/dashbord');
         // res.redirect('/');
@@ -154,7 +151,7 @@ exports.postChangePassword = async (req, res, next) => {
         const chngPass = await User.findOneAndUpdate(
             { _id: req.user._id },
             { $set: { password: hash } },
-            { new: true },
+            { new: true }
         );
         if (chngPass) {
             return res.redirect('/user/logout');
