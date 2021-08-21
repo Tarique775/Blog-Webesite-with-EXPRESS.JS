@@ -8,7 +8,7 @@ const authorRoute = require('../authorRoute');
 
 const router = [
     {
-        path: '/blogs',
+        path: '/',
         handler: blogRoute,
     },
     {
