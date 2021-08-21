@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage,
-    limits: 1224 * 1224 * 10,
+    limits: 1224 * 1224 * 50,
     fileFilter: (req, file, cb) => {
         if (file.fieldname === 'profilePics') {
             if (
