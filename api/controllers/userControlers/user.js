@@ -94,7 +94,7 @@ exports.postLogin = async (req, res, next) => {
         }
         const token = await user.getAuthToken();
         console.log(token);
-        const cookie = res.cookie('moketest', token, {
+        const cookie = res.cookie('jwt', token, {
             expires: new Date(Date.now() + 60 * 60 * 1000),
             httpOnly: true,
         });
@@ -110,7 +110,7 @@ exports.postLogin = async (req, res, next) => {
 exports.postLogout = async (req, res, next) => {
     try {
         req.user.tokens = [];
-        res.clearCookie('moktest');
+        res.clearCookie('jwt');
         await req.user.save();
         res.redirect('/user/login');
     } catch (e) {
