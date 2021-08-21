@@ -1,18 +1,18 @@
 // for localhost
 // const socket = io('http://localhost:5000');
 // for deploy
-const socket = io('https://web-blog-bd.herokuapp.com');
+// const socket = io('https://web-blog-bd.herokuapp.com');
 
 const comment = document.getElementById('comment');
 const commentHolder = document.getElementById('comment-holder');
 
 // const replyComment = document.getElementById('replyComment');
 
-socket.on('new_comment', (msg) => {
-    const commentElement = createComment(msg);
-    const commentHolders = commentHolder.children[0];
-    commentHolder.insertBefore(commentElement, commentHolders);
-});
+// socket.on('new_comment', (msg) => {
+//     const commentElement = createComment(msg);
+//     const commentHolders = commentHolder.children[0];
+//     commentHolder.insertBefore(commentElement, commentHolders);
+// });
 // socket.on('new_reply', (replys) => {
 //     const replyElement = createReplyElement(replys);
 //     const parent = replyComment.parentElement;
@@ -31,9 +31,9 @@ comment.addEventListener('keypress', (e) => {
             fetch(req)
                 .then((res) => res.json())
                 .then((data) => {
-                    // const commentElement = createComment(data);
-                    // const commentHolders = commentHolder.children[0];
-                    // commentHolder.insertBefore(commentElement, commentHolders);
+                    const commentElement = createComment(data);
+                    const commentHolders = commentHolder.children[0];
+                    commentHolder.insertBefore(commentElement, commentHolders);
                     // console.log(data);
 
                     e.target.value = '';
