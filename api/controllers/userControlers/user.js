@@ -94,9 +94,10 @@ exports.postLogin = async (req, res, next) => {
         }
         const token = await user.getAuthToken();
         console.log(token);
-        const cookie = res.cookie('jwt', token, {
-            expires: new Date(Date.now() + 60 * 60 * 1000),
+        const cookie = res.cookie(process.env.SET_COOKIE, token, {
+            maxAge: process.env.JWT_EXPIRY,
             httpOnly: true,
+            signed: true,
         });
         console.log(cookie);
         res.redirect('/dashbord');
@@ -110,7 +111,7 @@ exports.postLogin = async (req, res, next) => {
 exports.postLogout = async (req, res, next) => {
     try {
         req.user.tokens = [];
-        res.clearCookie('jwt');
+        res.clearCookie(process.env.SET_COOKIE);
         await req.user.save();
         res.redirect('/user/login');
     } catch (e) {

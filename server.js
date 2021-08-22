@@ -27,7 +27,7 @@ const mongoDBConnect = async () => {
                 useUnifiedTopology: true,
                 useFindAndModify: false,
                 useCreateIndex: true,
-            }
+            },
         );
         if (mongooseConnect) {
             return console.log(chalk.green.inverse('Database Conected Successfully!'));
@@ -42,10 +42,10 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(morgan('dev'));
-app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.SECRET));
 app.use(auth());
 app.use(locals());
 

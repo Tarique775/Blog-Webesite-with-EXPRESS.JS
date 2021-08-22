@@ -60,7 +60,7 @@ userSchema.methods.matchPassword = async function (password) {
 
 userSchema.methods.getAuthToken = async function (next) {
     try {
-        const token = await jwt.sign({ _id: this._id }, process.env.SECRET, {
+        const token = await jwt.sign({ userName: this.userName }, process.env.SECRET, {
             expiresIn: '2h',
         });
         this.tokens = this.tokens.concat({ token });
