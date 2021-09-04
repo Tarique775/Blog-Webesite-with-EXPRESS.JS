@@ -1,5 +1,5 @@
 # Blog-Webesite-with-EXPRESS.JS
-Here i build a Blog with Multiple Users and User Dashbord
+Here i build a Blog with Multiple Users and User Dashboard
 
 # Key Features of My Project
 * User can register and login
