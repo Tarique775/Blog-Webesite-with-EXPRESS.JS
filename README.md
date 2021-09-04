@@ -10,7 +10,7 @@ Here i build a Blog with Multiple Users and User Dashboard
 * User can update their profile and change password
 
 # Live Project Demo
-https://web-blog-bd.herokuapp.com
+Please click on this link https://web-blog-bd.herokuapp.com
 
 # How to run Please follow the below instructions to run this project in your machine
 
