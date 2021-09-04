@@ -9,6 +9,9 @@ Here i build a Blog with Multiple Users and User Dashboard
 * Logged in user can also bookmark post
 * User can update their profile and change password
 
+# Live Project Demo
+https://web-blog-bd.herokuapp.com
+
 # How to run Please follow the below instructions to run this project in your machine
 
 1.Clone this repository =>git clone https://github.com/Tarique775/Blog-Website-with-EXPRESS.JS.git
