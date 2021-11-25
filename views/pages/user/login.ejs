@@ -11,6 +11,7 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
+    <script src="https://kit.fontawesome.com/e23e3d5407.js"></script>
   </head>
   <body class="bg-light">
     <%- include('../nabbar.ejs') -%>
@@ -78,12 +79,17 @@
               <br />
               <button
                 type="submit"
-                class="btn btn-primary mb-3 rounded-pill py-2"
+                class="btn btn-primary mb-2 rounded-pill py-2"
                 style="width: 100%"
               >
                 Login
               </button>
             </form>
+            <h5 class="text-center">OR</h5>
+            <a href="/google" class="btn btn-danger mb-3 mx-2 rounded-pill py-2"
+              >Google+</a
+            >
+
             <p class="text-center">
               Don't have an account?
               <a href="/user/signup" style="text-decoration: none">SignUp</a>
